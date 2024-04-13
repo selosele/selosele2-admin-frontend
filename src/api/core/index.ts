@@ -52,7 +52,7 @@ http.interceptors.response.use(
           const { data } = await http.post('/auth/refresh')
           const newAccessToken = data.accessToken
           
-          //store.commit('Auth/SET_ACCESS_TOKEN', newAccessToken)
+          window.localStorage.setItem('accessToken', newAccessToken)
       
           originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`
 

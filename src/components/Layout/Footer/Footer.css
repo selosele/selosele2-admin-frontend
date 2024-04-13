@@ -1,5 +1,7 @@
 .layout__footer {
-  padding: 1rem;
+  padding: 0.9rem 0.5rem;
+  background-color: #eaeaea;
+  text-align: center;
 }
 
 .layout__footer p {

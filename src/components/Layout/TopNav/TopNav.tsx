@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
@@ -7,8 +7,9 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
+import LogoutIcon from '@mui/icons-material/Logout'
 import { CssBaseline, Divider, Drawer, List, ListItem, ListItemButton, ListItemText } from '@mui/material'
-import { messageUtil } from '@/utils'
+import { messageUtil, theme } from '@/utils'
 
 interface Props {
   window?: () => Window
@@ -17,18 +18,27 @@ interface Props {
 const drawerWidth = 240
 const siteTitle = '블로그 ADMIN 시스템'
 const navItems = [
-  '공통코드 관리',
-  '메뉴 관리',
-  '카테고리/태그 관리',
-  '포스트 댓글 관리',
-  '콘텐츠 관리',
-  '만족도조사 관리',
-  '검색 관리',
-  '프로그램 관리'
+  { to: '/code', name: '공통코드 관리' },
+  { to: '/menu', name: '메뉴 관리' },
+  { to: '/category', name: '카테고리/태그 관리' },
+  { to: '/post-reply', name: '포스트 댓글 관리' },
+  { to: '/content', name: '콘텐츠 관리' },
+  { to: '/satisfaction', name: '만족도조사 관리' },
+  { to: '/search', name: '검색 관리' },
+  { to: '/program', name: '프로그램 관리' }
 ]
 
 /** 레이아웃 탑메뉴 컴포넌트 */
 export default function TopMenu(props: Props) {
+  const css = `
+    .topnav .active button {
+      background-color: ${theme.palette.action.selected};
+    }
+    .topnav .active > li > div {
+      background-color: rgba(0, 0, 0, 0.04);
+    }
+  `
+
   const navigate = useNavigate()
   const [mobileOpen, setMobileOpen] = useState(false)
 
@@ -37,18 +47,20 @@ export default function TopMenu(props: Props) {
   }
 
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
+    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }} className={`topnav`}>
       <Typography variant="h6" sx={{ my: 2 }}>
         <Link to="/">{siteTitle}</Link>
       </Typography>
       <Divider />
       <List>
         {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }}>
-              <ListItemText primary={item} />
-            </ListItemButton>
-          </ListItem>
+          <NavLink key={item.to} to={item.to}>
+            <ListItem key={item.to} disablePadding>
+              <ListItemButton sx={{ textAlign: 'center' }}>
+                <ListItemText primary={item.name} />
+              </ListItemButton>
+            </ListItem>
+          </NavLink>
         ))}
       </List>
     </Box>
@@ -69,11 +81,13 @@ export default function TopMenu(props: Props) {
   }
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex' }} className={`topnav`}>
+      <style>{css}</style>
+
       <CssBaseline />
       <AppBar component="nav">
         <Toolbar>
-        <IconButton
+          <IconButton
             color="inherit"
             aria-label="open drawer"
             edge="start"
@@ -85,18 +99,22 @@ export default function TopMenu(props: Props) {
           <Typography
             variant="h6"
             component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+            sx={{ flexGrow: 1 }}
           >
             <Link to="/">{siteTitle}</Link>
           </Typography>
-          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
-              <Button key={item} sx={{ color: '#fff' }}>
-                {item}
-              </Button>
+              <NavLink key={item.to} to={item.to}>
+                <Button key={item.to} sx={{ color: '#fff' }}>
+                  {item.name}
+                </Button>
+              </NavLink>
             ))}
           </Box>
-          <Button color="inherit" onClick={logOut}>Logout</Button>
+          <Button color="inherit" onClick={logOut}>
+            <LogoutIcon fontSize="small" />
+          </Button>
         </Toolbar>
       </AppBar>
       <nav>
