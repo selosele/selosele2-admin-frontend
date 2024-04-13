@@ -1,7 +1,8 @@
-import { Button } from '@mui/material'
+import { Button, useMediaQuery } from '@mui/material'
 import CreateIcon from '@mui/icons-material/Create'
 import DeleteIcon from '@mui/icons-material/Delete'
 import RefreshIcon from '@mui/icons-material/Refresh'
+import { theme } from '@/utils'
 
 interface Props {
 
@@ -20,7 +21,7 @@ interface Props {
   /** 새창 target */
   target?: string
 
-  /** 클릭 이벤트핸들러 */
+  /** 클릭 이벤트 핸들러 */
   onClick?: React.MouseEventHandler<HTMLButtonElement>
 }
 
@@ -45,9 +46,12 @@ export default function DataGridButton({ actionType = 'ADD', ...props }: Props) 
     }
   }
 
+  const isFullWidth = useMediaQuery(theme.breakpoints.down('sm'))
+
   return (
     <Button
       variant={getVariant()}
+      fullWidth={isFullWidth}
       { ...props }
     >
       {getIcon()}
