@@ -26,7 +26,7 @@ export function GlobalRouter() {
           <Route path="/code" element={<Pages.Code />}></Route>
           {/* 콘텐츠 관리 페이지 */}
           <Route path="/content" element={<Pages.Content />}></Route>
-          {/* 콘텐츠 관리 페이지 */}
+          {/* 검색 관리 페이지 */}
           <Route path="/search" element={<Pages.Search />}></Route>
         </Route>
         {/* TODO: 에러페이지 개발 필요 <Route path="/error" element={<Error />}></Route> */} 
