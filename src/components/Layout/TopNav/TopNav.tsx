@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
@@ -10,6 +10,7 @@ import MenuIcon from '@mui/icons-material/Menu'
 import LogoutIcon from '@mui/icons-material/Logout'
 import { CssBaseline, Divider, Drawer, List, ListItem, ListItemButton, ListItemText } from '@mui/material'
 import { messageUtil, theme } from '@/utils'
+import useAuthStore from '@/store/auth'
 
 interface Props {
   window?: () => Window
@@ -39,7 +40,7 @@ export default function TopMenu(props: Props) {
     }
   `
 
-  const navigate = useNavigate()
+  const authStore = useAuthStore()
   const [mobileOpen, setMobileOpen] = useState(false)
 
   const handleDrawerToggle = () => {
@@ -76,8 +77,7 @@ export default function TopMenu(props: Props) {
     const confirm = await messageUtil.confirmQuestion('로그아웃하시겠습니까?')
     if (!confirm) return
 
-    localStorage.removeItem('accessToken')
-    navigate('/login')
+    authStore.logout()
   }
 
   return (

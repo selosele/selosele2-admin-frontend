@@ -3,7 +3,7 @@ import { Box } from '@mui/material'
 import { DataGrid, GridColDef, GridRowSelectionModel } from '@mui/x-data-grid'
 import { http } from '@/api'
 import { UI } from '@/components/UI'
-import { BLOG_URL, isNotEmpty, messageUtil } from '@/utils'
+import { BLOG_URL, deepCopy, isNotEmpty, messageUtil } from '@/utils'
 import moment from 'moment'
 
 /** 콘텐츠 관리 페이지 컴포넌트 */
@@ -21,7 +21,7 @@ export default function Content() {
   const listContent = () => {
     http.get('/content')
     .then(resp => {
-      setList(resp.data[0].map(d => {
+      setList(deepCopy(resp.data[0]).map(d => {
         d.regDate = moment(d.regDate).format('YYYY-MM-DD HH:mm:ss')
 
         if (isNotEmpty(d.modDate)) {
@@ -35,7 +35,7 @@ export default function Content() {
 
   /** 콘텐츠 삭제 */
   const removeContents = async () => {
-    if (0 === rowSelection.length) {
+    if (rowSelection.length === 0) {
       messageUtil.toastWarning('삭제할 콘텐츠를 선택하세요.')
       return
     }
@@ -60,6 +60,7 @@ export default function Content() {
     <Box sx={{ height: 500, width: '100%' }}>
       <UI.DataGridButtonBox>
         <UI.DataGridButton
+          actionType={'ADD'}
           text={'콘텐츠 생성'}
           href={`${BLOG_URL}/add-content`}
           target="_blank"

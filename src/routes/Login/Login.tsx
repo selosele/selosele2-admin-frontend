@@ -26,19 +26,16 @@ export default function Login() {
         .min(8, '최소 8글자 이상이어야 합니다')
         .max(10, '최대 10글자 이하여야 합니다'),
     }),
-    onSubmit: (values, { setSubmitting }) => {
+    onSubmit: async (values, { setSubmitting }) => {
       setSubmitting(true)
-      http.post('/auth/signin', values)
-      .then(resp => {
-        const accessToken = resp.data?.accessToken
+      const { data } = await http.post('/auth/signin', values)
+      const accessToken = data?.accessToken
       
-        if (accessToken) {
-          http.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`
-          window.localStorage.setItem('accessToken', accessToken)
-          
-          navigate('/')
-        }
-      })
+      if (accessToken) {
+        http.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`
+        window.localStorage.setItem('accessToken', accessToken)
+        navigate('/')
+      }
     },
   })
 

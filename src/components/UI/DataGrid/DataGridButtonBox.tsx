@@ -9,6 +9,7 @@ export default function DataGridButtonBox(props: Children) {
         display: 'flex',
         flexWrap: 'wrap',
         justifyContent: 'end',
+        alignItems: 'center',
         gap: '0.5rem',
         marginBottom: '0.75rem'
       }}

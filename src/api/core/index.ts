@@ -1,6 +1,6 @@
-import { isNotBlank, messageUtil } from '@/utils'
-import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import useAuthStore from '@/store/auth'
+import { handleNavigation, isNotBlank, messageUtil } from '@/utils'
 
 /** axios 인스턴스 */
 const http = axios.create({
@@ -12,14 +12,11 @@ const http = axios.create({
 
 http.interceptors.request.use(
   config => {
-
     /** 액세스 토큰 */
     const accessToken = window.localStorage.getItem('accessToken')
-
     if (isNotBlank(accessToken)) {
-      config.headers['Authorization']= `Bearer ${accessToken}`
+      config.headers['Authorization'] = `Bearer ${accessToken}`
     }
-
     return config
   },
   error => {
@@ -34,7 +31,7 @@ http.interceptors.response.use(
   async error => {
     const originalRequest = error.config
 
-    if (isNotBlank(error?.response?.data?.type) && 'biz' === error?.response?.data?.type) {
+    if (isNotBlank(error?.response?.data?.type) && error?.response?.data?.type === 'biz') {
       // 비즈니스 로직 예외 처리
       messageUtil.toastError(error.response.data?.message)
     } else {
@@ -43,7 +40,7 @@ http.interceptors.response.use(
     }
 
     // 권한 오류 및 JWT 만료 시
-    if (401 === error?.response?.status && !originalRequest._retry) {
+    if (error?.response?.status === 401 && !originalRequest._retry) {
       if (!isRefreshing) {
         originalRequest._retry = true
         isRefreshing = true
@@ -53,9 +50,7 @@ http.interceptors.response.use(
           const newAccessToken = data.accessToken
           
           window.localStorage.setItem('accessToken', newAccessToken)
-      
           originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`
-
           originalRequest._retry = false
           isRefreshing = false
 
@@ -64,7 +59,7 @@ http.interceptors.response.use(
           console.error('Error refreshing access token:', error)
           
           // 강제 로그아웃
-          //store.dispatch('Auth/LOGOUT')
+          useAuthStore.getState().logout()
           
           return Promise.reject(error)
         }
@@ -72,17 +67,11 @@ http.interceptors.response.use(
     }
 
     // 404 오류
-    if (404 === error?.response?.status) {
+    if (error?.response?.status === 404) {
       handleNavigation('/error')
     }
-
     return Promise.reject(error)
   }
 )
-
-function handleNavigation(path: string) {
-  const navigate = useNavigate()
-  navigate(path)
-}
 
 export { http }

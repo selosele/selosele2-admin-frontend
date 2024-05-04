@@ -7,7 +7,7 @@ import { theme } from '@/utils'
 interface Props {
 
   /** 액션 유형 */
-  actionType?: string
+  actionType?: '' | 'ADD' | 'REFRESH' | 'REMOVE'
 
   /** 버튼 텍스트 */
   text?: string
@@ -23,26 +23,29 @@ interface Props {
 
   /** 클릭 이벤트 핸들러 */
   onClick?: React.MouseEventHandler<HTMLButtonElement>
+  
 }
 
 /** 데이터그리드 버튼 컴포넌트 */
-export default function DataGridButton({ actionType = 'ADD', ...props }: Props) {
+export default function DataGridButton({ actionType = '', ...props }: Props) {
 
   /** 버튼 색상 리턴 */
   const getVariant = () => {
     switch (actionType) {
-      case 'ADD': return 'contained'
+      case '':
+      case 'ADD':     return 'contained'
       case 'REFRESH': return 'outlined'
-      case 'REMOVE': return 'outlined'
+      case 'REMOVE':  return 'outlined'
     }
   }
 
   /** 버튼 아이콘 컴포넌트 리턴 */
   const getIcon = () => {
     switch (actionType) {
-      case 'ADD': return <CreateIcon />
-      case 'REFRESH': return <RefreshIcon />
-      case 'REMOVE': return <DeleteIcon />
+      case '':        return ''
+      case 'ADD':     return <CreateIcon fontSize='small' />
+      case 'REFRESH': return <RefreshIcon fontSize='small' />
+      case 'REMOVE':  return <DeleteIcon fontSize='small' />
     }
   }
 
@@ -52,6 +55,11 @@ export default function DataGridButton({ actionType = 'ADD', ...props }: Props) 
     <Button
       variant={getVariant()}
       fullWidth={isFullWidth}
+      style={{
+        height: '1.9rem',
+        paddingLeft: '0.5rem',
+        paddingRight: '0.5rem'
+      }}
       { ...props }
     >
       {getIcon()}
