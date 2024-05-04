@@ -4,7 +4,7 @@ import './Footer.css'
 export default function Footer() {
   return (
     <footer className={`layout__footer`}>
-      <p>copyright selosele.</p>
+      <p>since 2024 ~</p>
     </footer>
   )
 }
