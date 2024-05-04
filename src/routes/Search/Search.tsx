@@ -59,8 +59,10 @@ export default function Search() {
   }
 
   useEffect(() => {
-    listIndexSearchLog()
-  }, [])
+    if (codeStore.data.length > 0) {
+      listIndexSearchLog()
+    }
+  }, [codeStore.data])
 
   useEffect(() => {
     const autoY = list.filter(d => d.autoYn === 'Y')
