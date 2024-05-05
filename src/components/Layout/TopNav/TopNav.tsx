@@ -26,7 +26,7 @@ const navItems = [
   { to: '/content', name: '콘텐츠 관리' },
   { to: '/satisfaction', name: '만족도조사 관리' },
   { to: '/search', name: '검색 관리' },
-  { to: '/program', name: '프로그램 관리' }
+  // { to: '/program', name: '프로그램 관리' }
 ]
 
 /** 레이아웃 탑메뉴 컴포넌트 */
