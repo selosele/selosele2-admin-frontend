@@ -3,11 +3,13 @@ import Main from './Main/Main'
 import Code from './Code/Code'
 import Content from './Content/Content'
 import Search from './Search/Search'
+import Menu from './Menu/Menu'
+import Category from './Category/Category'
 import PrivateRoute from './PrivateRoute'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 /** 페이지 컴포넌트 */
-export const Pages = { Login, Main, Code, Content, Search }
+export const Pages = { Login, Main, Code, Content, Search, Menu, Category }
 
 /** 공통 라우터 */
 export function GlobalRouter() {
@@ -24,6 +26,10 @@ export function GlobalRouter() {
           <Route path="/" element={<Pages.Main />}></Route>
           {/* 공통코드 관리 페이지 */}
           <Route path="/code" element={<Pages.Code />}></Route>
+          {/* 메뉴 관리 페이지 */}
+          <Route path="/menu" element={<Pages.Menu />}></Route>
+          {/* 카테고리/태그 관리 페이지 */}
+          <Route path="/category" element={<Pages.Category />}></Route>
           {/* 콘텐츠 관리 페이지 */}
           <Route path="/content" element={<Pages.Content />}></Route>
           {/* 검색 관리 페이지 */}
