@@ -29,7 +29,7 @@ class MessageUtil {
 
   /** Alert 성공 타입 */
   alertSuccess(title: string, text = '') {
-    return new Promise((resolve, _) => {
+    return new Promise((resolve,_) => {
 			this._alert.fire({
 				title: title,
 				text: text,
@@ -40,7 +40,7 @@ class MessageUtil {
 
   /** Alert 오류 타입 */
   alertError(title: string, text = '') {
-    return new Promise((resolve, _) => {
+    return new Promise((resolve,_) => {
 			this._alert.fire({
 				title: title,
 				text: text,
@@ -51,7 +51,7 @@ class MessageUtil {
 
   /** Alert 경고 타입 */
   alertWarning(title: string, text = '') {
-    return new Promise((resolve, _) => {
+    return new Promise((resolve,_) => {
 			this._alert.fire({
 				title: title,
 				text: text,
@@ -62,7 +62,7 @@ class MessageUtil {
 
   /** Alert 정보 타입 */
   alertInfo(title: string, text = '') {
-    return new Promise((resolve, _) => {
+    return new Promise((resolve,_) => {
 			this._alert.fire({
 				title: title,
 				text: text,
@@ -73,7 +73,7 @@ class MessageUtil {
 
   /** Alert 질문 타입 */
   alertQuestion(title: string, text = '') {
-    return new Promise((resolve, _) => {
+    return new Promise((resolve,_) => {
 			this._alert.fire({
 				title: title,
 				text: text,
@@ -84,7 +84,7 @@ class MessageUtil {
 
   /** Confirm 성공 타입 */
   confirmSuccess(title: string, text = '') {
-    return new Promise((resolve, _) => {
+    return new Promise((resolve,_) => {
 			this._confirm.fire({
 				title: title,
 				text: text,
@@ -95,7 +95,7 @@ class MessageUtil {
 
   /** Confirm 오류 타입 */
   confirmError(title: string, text = '') {
-    return new Promise((resolve, _) => {
+    return new Promise((resolve,_) => {
 			this._confirm.fire({
 				title: title,
 				text: text,
@@ -106,7 +106,7 @@ class MessageUtil {
 
   /** Confirm 경고 타입 */
   confirmWarning(title: string, text = '') {
-    return new Promise((resolve, _) => {
+    return new Promise((resolve,_) => {
 			this._confirm.fire({
 				title: title,
 				text: text,
@@ -117,7 +117,7 @@ class MessageUtil {
 
   /** Confirm 정보 타입 */
   confirmInfo(title: string, text = '') {
-    return new Promise((resolve, _) => {
+    return new Promise((resolve,_) => {
 			this._confirm.fire({
 				title: title,
 				text: text,
@@ -128,7 +128,7 @@ class MessageUtil {
 
   /** Confirm 질문 타입 */
   confirmQuestion(title: string, text = '') {
-    return new Promise((resolve, _) => {
+    return new Promise((resolve,_) => {
 			this._confirm.fire({
 				title: title,
 				text: text,
