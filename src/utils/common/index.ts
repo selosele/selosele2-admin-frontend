@@ -1,5 +1,3 @@
-import { useNavigate } from "react-router-dom"
-
 /** 블로그 URL */
 export const BLOG_URL = 'https://blog.selosele.com'
 
@@ -26,10 +24,4 @@ export function isNotBlank(value: any): boolean {
 /** 깊은 복사를 해서 반환한다. */
 export function deepCopy(value: any): any {
   return JSON.parse(JSON.stringify(value))
-}
-
-/** 페이지를 이동한다. */
-export function handleNavigation(path: string) {
-  const navigate = useNavigate()
-  navigate(path)
 }

@@ -1,6 +1,7 @@
 import axios from 'axios'
 import useAuthStore from '@/store/auth'
-import { handleNavigation, isNotBlank, messageUtil } from '@/utils'
+import { isNotBlank, messageUtil } from '@/utils'
+import globalRouter from '@/routes'
 
 /** axios 인스턴스 */
 const http = axios.create({
@@ -68,7 +69,7 @@ http.interceptors.response.use(
 
     // 404 오류
     if (error?.response?.status === 404) {
-      handleNavigation('/error')
+      globalRouter.navigate('/error')
     }
     return Promise.reject(error)
   }
