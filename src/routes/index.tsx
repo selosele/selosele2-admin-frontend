@@ -6,12 +6,17 @@ import Search from './Search/Search'
 import Menu from './Menu/Menu'
 import Category from './Category/Category'
 import Satisfaction from './Satisfaction/Satisfaction'
+import PostReply from './PostReply/PostReply'
 import NotFound from './NotFound/NotFound'
 import PrivateRoute from './PrivateRoute'
 import { NavigateFunction, Route, Routes, useNavigate } from 'react-router-dom'
 
 /** 페이지 컴포넌트 */
-export const Pages = { Login, Main, Code, Content, Search, Menu, Category, Satisfaction, NotFound }
+export const Pages = {
+  Login, Main, Code, Content,
+  Search, Menu, Category,
+  Satisfaction, PostReply, NotFound
+}
 
 /** 공통 라우터 컴포넌트 */
 export function GlobalRouter() {
@@ -34,6 +39,8 @@ export function GlobalRouter() {
         <Route path='/menu' element={<Pages.Menu />}></Route>
         {/* 카테고리/태그 관리 페이지 */}
         <Route path='/category' element={<Pages.Category />}></Route>
+        {/* 카테고리/태그 관리 페이지 */}
+        <Route path='/post-reply' element={<Pages.PostReply />}></Route>
         {/* 콘텐츠 관리 페이지 */}
         <Route path='/content' element={<Pages.Content />}></Route>
         {/* 콘텐츠 관리 페이지 */}
