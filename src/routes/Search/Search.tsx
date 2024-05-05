@@ -17,7 +17,7 @@ export default function Search() {
     { headerName: '자동 색인 여부', field: 'autoYnNm', flex: 1 },
     { headerName: '색인 건수', field: 'cnt', flex: 1 },
     { headerName: '색인 시작일시', field: 'startDate', flex: 1 },
-    { headerName: '색인 종료일시', field: 'endDate', flex: 1 },
+    { headerName: '색인 종료일시', field: 'endDate', flex: 1 }
   ]
 
   /** 자동 색인 여부 반환 */

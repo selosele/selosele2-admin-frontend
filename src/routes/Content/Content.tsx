@@ -13,7 +13,7 @@ export default function Content() {
     { headerName: '콘텐츠 URL', field: 'link', flex: 1 }, // width값 설정 시 minWidth 속성을 사용해야 함
     { headerName: '콘텐츠 제목', field: 'title', flex: 1 },
     { headerName: '콘텐츠 등록일시', field: 'regDate', flex: 1 },
-    { headerName: '콘텐츠 수정일시', field: 'modDate' , flex: 1 },
+    { headerName: '콘텐츠 수정일시', field: 'modDate' , flex: 1 }
   ]
 
   /** 콘텐츠 목록 조회 */
