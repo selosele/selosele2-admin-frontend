@@ -16,5 +16,5 @@ export default function PrivateRoute() {
     )
   }
   // 미로그인 유저가 이동할 곳
-  return <Navigate replace to="/login" />
+  return <Navigate replace to='/login' />
 }

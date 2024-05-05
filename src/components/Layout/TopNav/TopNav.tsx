@@ -49,8 +49,8 @@ export default function TopMenu(props: Props) {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }} className={`topnav`}>
-      <Typography variant="h6" sx={{ my: 2 }}>
-        <Link to="/">{siteTitle}</Link>
+      <Typography variant='h6' sx={{ my: 2 }}>
+        <Link to='/'>{siteTitle}</Link>
       </Typography>
       <Divider />
       <List>
@@ -85,23 +85,23 @@ export default function TopMenu(props: Props) {
       <style>{css}</style>
 
       <CssBaseline />
-      <AppBar component="nav">
+      <AppBar component='nav'>
         <Toolbar>
           <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
+            color='inherit'
+            aria-label='open drawer'
+            edge='start'
             onClick={handleDrawerToggle}
             sx={{ mr: 2, display: { sm: 'none' } }}
           >
             <MenuIcon />
           </IconButton>
           <Typography
-            variant="h6"
-            component="div"
+            variant='h6'
+            component='div'
             sx={{ flexGrow: 1 }}
           >
-            <Link to="/">{siteTitle}</Link>
+            <Link to='/'>{siteTitle}</Link>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
@@ -112,15 +112,15 @@ export default function TopMenu(props: Props) {
               </NavLink>
             ))}
           </Box>
-          <Button color="inherit" onClick={logOut}>
-            <LogoutIcon fontSize="small" />
+          <Button color='inherit' onClick={logOut}>
+            <LogoutIcon fontSize='small' />
           </Button>
         </Toolbar>
       </AppBar>
       <nav>
         <Drawer
           container={container}
-          variant="temporary"
+          variant='temporary'
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{

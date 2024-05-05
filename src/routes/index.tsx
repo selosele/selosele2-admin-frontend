@@ -5,12 +5,13 @@ import Content from './Content/Content'
 import Search from './Search/Search'
 import Menu from './Menu/Menu'
 import Category from './Category/Category'
+import Satisfaction from './Satisfaction/Satisfaction'
 import NotFound from './NotFound/NotFound'
 import PrivateRoute from './PrivateRoute'
 import { NavigateFunction, Route, Routes, useNavigate } from 'react-router-dom'
 
 /** 페이지 컴포넌트 */
-export const Pages = { Login, Main, Code, Content, Search, Menu, Category, NotFound }
+export const Pages = { Login, Main, Code, Content, Search, Menu, Category, Satisfaction, NotFound }
 
 /** 공통 라우터 컴포넌트 */
 export function GlobalRouter() {
@@ -20,27 +21,29 @@ export function GlobalRouter() {
   return (
     <Routes>
       {/* 로그인 페이지 */}
-      <Route path="/login" element={<Pages.Login />}></Route>
+      <Route path='/login' element={<Pages.Login />}></Route>
 
       {/* 로그인이 필요한 페이지들 */}
       <Route element={<PrivateRoute />}>
 
         {/* 메인 페이지 */}
-        <Route path="/" element={<Pages.Main />}></Route>
+        <Route path='/' element={<Pages.Main />}></Route>
         {/* 공통코드 관리 페이지 */}
-        <Route path="/code" element={<Pages.Code />}></Route>
+        <Route path='/code' element={<Pages.Code />}></Route>
         {/* 메뉴 관리 페이지 */}
-        <Route path="/menu" element={<Pages.Menu />}></Route>
+        <Route path='/menu' element={<Pages.Menu />}></Route>
         {/* 카테고리/태그 관리 페이지 */}
-        <Route path="/category" element={<Pages.Category />}></Route>
+        <Route path='/category' element={<Pages.Category />}></Route>
         {/* 콘텐츠 관리 페이지 */}
-        <Route path="/content" element={<Pages.Content />}></Route>
+        <Route path='/content' element={<Pages.Content />}></Route>
+        {/* 콘텐츠 관리 페이지 */}
+        <Route path='/satisfaction' element={<Pages.Satisfaction />}></Route>
         {/* 검색 관리 페이지 */}
-        <Route path="/search" element={<Pages.Search />}></Route>
+        <Route path='/search' element={<Pages.Search />}></Route>
 
         {/* 에러 페이지 */}
-        <Route path="/error" element={<Pages.NotFound />}></Route>
-        <Route path="*" element={<Pages.NotFound />}></Route>
+        <Route path='/error' element={<Pages.NotFound />}></Route>
+        <Route path='*' element={<Pages.NotFound />}></Route>
       </Route>
     </Routes>
   )
