@@ -32,7 +32,7 @@ export default function DataGridButton({ actionType = '', ...props }: Props) {
   /** 버튼 색상 리턴 */
   const getVariant = () => {
     switch (actionType) {
-      case '':
+      case '':        return 'contained'
       case 'ADD':     return 'contained'
       case 'REFRESH': return 'outlined'
       case 'REMOVE':  return 'outlined'
