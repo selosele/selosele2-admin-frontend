@@ -4,7 +4,7 @@ import { GridColDef, GridRowSelectionModel } from '@mui/x-data-grid'
 import { http } from '@/api'
 import { UI } from '@/components/UI'
 import { BLOG_URL, deepCopy, isNotEmpty, messageUtil } from '@/utils'
-import moment from 'moment'
+import dayjs from 'dayjs'
 
 /** 콘텐츠 관리 페이지 컴포넌트 */
 export default function Content() {
@@ -22,10 +22,10 @@ export default function Content() {
     http.get('/content')
     .then(resp => {
       setList(deepCopy(resp.data[0]).map(d => {
-        d.regDate = moment(d.regDate).format('YYYY-MM-DD HH:mm:ss')
+        d.regDate = dayjs(d.regDate).format('YYYY-MM-DD HH:mm:ss')
 
         if (isNotEmpty(d.modDate)) {
-          d.modDate = moment(d.modDate).format('YYYY-MM-DD HH:mm:ss')
+          d.modDate = dayjs(d.modDate).format('YYYY-MM-DD HH:mm:ss')
         }
         return d
       }))

@@ -5,7 +5,7 @@ import { http } from '@/api'
 import { deepCopy, messageUtil } from '@/utils'
 import { UI } from '@/components/UI'
 import useCodeStore from '@/store/code'
-import moment from 'moment'
+import dayjs from 'dayjs'
 
 /** 검색 관리 페이지 컴포넌트 */
 export default function Search() {
@@ -34,8 +34,8 @@ export default function Search() {
     http.get('/indexsearchlog')
     .then(resp => {
       setList(deepCopy(resp.data).map(d => {
-        d.startDate = moment(d.startDate).format('YYYY-MM-DD HH:mm:ss')
-        d.endDate = moment(d.endDate).format('YYYY-MM-DD HH:mm:ss')
+        d.startDate = dayjs(d.startDate).format('YYYY-MM-DD HH:mm:ss')
+        d.endDate = dayjs(d.endDate).format('YYYY-MM-DD HH:mm:ss')
         d.autoYnNm = getAutoYn(d.autoYn)
         d.typeCdNm = codeStore.data
           .filter(v => v.prefix === 'D03')
