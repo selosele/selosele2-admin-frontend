@@ -13,12 +13,12 @@ export default function Search() {
   const [list, setList] = useState([])
   const [autoSaveDate, setAutoSaveDate] = useState(null)
   const columns: GridColDef<(typeof list)[number]>[] = [
-    { field: 'rownum', flex: 1 },
-    { headerName: '유형', field: 'typeCdNm', minWidth: 50, flex: 1 }, // width값 설정 시 minWidth 속성을 사용해야 함
-    { headerName: '자동 색인 여부', field: 'autoYnNm', minWidth: 100, flex: 1 },
-    { headerName: '색인 건수', field: 'cnt', minWidth: 150, flex: 1 },
-    { headerName: '색인 시작일시', field: 'startDate', minWidth: 100, flex: 1 },
-    { headerName: '색인 종료일시', field: 'endDate', minWidth: 100, flex: 1 },
+    { field: 'rownum' },
+    { headerName: '유형', field: 'typeCdNm', flex: 1 }, // width값 설정 시 minWidth 속성을 사용해야 함
+    { headerName: '자동 색인 여부', field: 'autoYnNm', flex: 1 },
+    { headerName: '색인 건수', field: 'cnt', flex: 1 },
+    { headerName: '색인 시작일시', field: 'startDate', flex: 1 },
+    { headerName: '색인 종료일시', field: 'endDate', flex: 1 },
   ]
 
   /** 자동 색인 여부 반환 */
