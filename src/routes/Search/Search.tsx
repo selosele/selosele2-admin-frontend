@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { DataGrid, GridColDef } from '@mui/x-data-grid'
+import { GridColDef } from '@mui/x-data-grid'
 import { Box } from '@mui/material'
 import { http } from '@/api'
 import { deepCopy, messageUtil } from '@/utils'
@@ -13,7 +13,7 @@ export default function Search() {
   const [list, setList] = useState([])
   const [autoSaveDate, setAutoSaveDate] = useState(null)
   const columns: GridColDef<(typeof list)[number]>[] = [
-    { headerName: 'No', field: 'rownum', flex: 1 },
+    { field: 'rownum', flex: 1 },
     { headerName: '유형', field: 'typeCdNm', minWidth: 50, flex: 1 }, // width값 설정 시 minWidth 속성을 사용해야 함
     { headerName: '자동 색인 여부', field: 'autoYnNm', minWidth: 100, flex: 1 },
     { headerName: '색인 건수', field: 'cnt', minWidth: 150, flex: 1 },
@@ -88,7 +88,7 @@ export default function Search() {
         />
       </UI.DataGridButtonBox>
 
-      <DataGrid
+      <UI.DataGrid
         rows={list}
         columns={columns}
         initialState={{

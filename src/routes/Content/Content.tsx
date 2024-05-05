@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Box } from '@mui/material'
-import { DataGrid, GridColDef, GridRowSelectionModel } from '@mui/x-data-grid'
+import { GridColDef, GridRowSelectionModel } from '@mui/x-data-grid'
 import { http } from '@/api'
 import { UI } from '@/components/UI'
 import { BLOG_URL, deepCopy, isNotEmpty, messageUtil } from '@/utils'
@@ -76,7 +76,7 @@ export default function Content() {
         />
       </UI.DataGridButtonBox>
 
-      <DataGrid
+      <UI.DataGrid
         rows={list}
         columns={columns}
         initialState={{
