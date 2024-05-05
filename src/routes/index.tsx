@@ -5,11 +5,12 @@ import Content from './Content/Content'
 import Search from './Search/Search'
 import Menu from './Menu/Menu'
 import Category from './Category/Category'
+import NotFound from './NotFound/NotFound'
 import PrivateRoute from './PrivateRoute'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 /** 페이지 컴포넌트 */
-export const Pages = { Login, Main, Code, Content, Search, Menu, Category }
+export const Pages = { Login, Main, Code, Content, Search, Menu, Category, NotFound }
 
 /** 공통 라우터 */
 export function GlobalRouter() {
@@ -34,9 +35,11 @@ export function GlobalRouter() {
           <Route path="/content" element={<Pages.Content />}></Route>
           {/* 검색 관리 페이지 */}
           <Route path="/search" element={<Pages.Search />}></Route>
+
+          {/* 에러 페이지 */}
+          <Route path="/error" element={<Pages.NotFound />}></Route>
+          <Route path="*" element={<Pages.NotFound />}></Route>
         </Route>
-        {/* TODO: 에러페이지 개발 필요 <Route path="/error" element={<Error />}></Route> */} 
-        {/* TODO: 404페이지 개발 필요(또는 에러페이지 사용?) <Route path="*" element={<NotFound />}></Route> */}
       </Routes>
     </BrowserRouter>
   )
