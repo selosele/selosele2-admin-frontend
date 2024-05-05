@@ -1,4 +1,4 @@
-import { Children } from '@/types/global'
+import { Children } from '@/models'
 import { Layout } from '..'
 
 import './Container.css'

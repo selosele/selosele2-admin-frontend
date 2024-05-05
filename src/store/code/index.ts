@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { http } from '@/api'
-import { Code, CodeState } from '@/types/code'
+import { Code, CodeState } from '@/models'
 
 /** 공통코드 Store */
 const useCodeStore = create<CodeState>(set => ({

@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { http } from '@/api'
-import { AuthState } from '@/types/auth'
+import { AuthState } from '@/models'
 import { messageUtil } from '@/utils'
 import globalRouter from '@/routes'
 
