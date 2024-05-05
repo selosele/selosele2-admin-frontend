@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { GridColDef } from '@mui/x-data-grid'
-import { Box } from '@mui/material'
 import { http } from '@/api'
 import { deepCopy, messageUtil } from '@/utils'
 import { UI } from '@/components/UI'
@@ -72,7 +71,7 @@ export default function Search() {
   }, [list])
 
   return (
-    <Box sx={{ width: '100%', height: 500 }}>
+    <UI.DataGridContainer>
       <UI.DataGridButtonBox>
         <p>
           최근 자동 색인 실행 일시: {autoSaveDate}
@@ -94,11 +93,11 @@ export default function Search() {
         initialState={{
           pagination: {
             paginationModel: {
-              pageSize: 20,
-            },
-          },
+              pageSize: 20
+            }
+          }
         }}
       />
-    </Box>
+    </UI.DataGridContainer>
   )
 }

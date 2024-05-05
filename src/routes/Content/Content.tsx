@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { Box } from '@mui/material'
 import { GridColDef, GridRowSelectionModel } from '@mui/x-data-grid'
 import { http } from '@/api'
 import { UI } from '@/components/UI'
@@ -57,13 +56,13 @@ export default function Content() {
   }
   
   return (
-    <Box sx={{ height: 500, width: '100%' }}>
+    <UI.DataGridContainer>
       <UI.DataGridButtonBox>
         <UI.DataGridButton
           actionType={'ADD'}
           text={'콘텐츠 생성'}
           href={`${BLOG_URL}/add-content`}
-          target="_blank"
+          target='_blank'
         />
         <UI.DataGridButton
           actionType={'REMOVE'}
@@ -82,9 +81,9 @@ export default function Content() {
         initialState={{
           pagination: {
             paginationModel: {
-              pageSize: 20,
-            },
-          },
+              pageSize: 20
+            }
+          }
         }}
         checkboxSelection
         // disableRowSelectionOnClick
@@ -93,6 +92,6 @@ export default function Content() {
           window.open(`${BLOG_URL}/content${param.row.link}`)
         }}
       />
-    </Box>
+    </UI.DataGridContainer>
   )
 }
