@@ -39,11 +39,11 @@ export function GlobalRouter() {
         <Route path='/menu' element={<Pages.Menu />}></Route>
         {/* 카테고리/태그 관리 페이지 */}
         <Route path='/category' element={<Pages.Category />}></Route>
-        {/* 카테고리/태그 관리 페이지 */}
+        {/* 포스트 댓글 관리 페이지 */}
         <Route path='/post-reply' element={<Pages.PostReply />}></Route>
         {/* 콘텐츠 관리 페이지 */}
         <Route path='/content' element={<Pages.Content />}></Route>
-        {/* 콘텐츠 관리 페이지 */}
+        {/* 만족도조사 관리 페이지 */}
         <Route path='/satisfaction' element={<Pages.Satisfaction />}></Route>
         {/* 검색 관리 페이지 */}
         <Route path='/search' element={<Pages.Search />}></Route>
