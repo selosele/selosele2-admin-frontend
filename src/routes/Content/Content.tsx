@@ -86,7 +86,6 @@ export default function Content() {
           }
         }}
         checkboxSelection
-        // disableRowSelectionOnClick
         onRowSelectionModelChange={setRowSelection}
         onCellDoubleClick={(param,_) => {
           window.open(`${BLOG_URL}/content${param.row.link}`)
