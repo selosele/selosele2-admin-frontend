@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { GridColDef, GridRowSelectionModel } from '@mui/x-data-grid'
-import { SelectChangeEvent } from '@mui/material'
 import { UI } from '@/components/UI'
 import { BLOG_URL, deepCopy, isNotBlank, messageUtil } from '@/utils'
 import { http } from '@/api'
@@ -10,9 +9,9 @@ import dayjs from 'dayjs'
 /** 포스트 댓글 관리 페이지 컴포넌트 */
 export default function PostReply() {
   const [option, setOption] = useState('')
+  const [rows, setRows] = useState([])
   const [rowSelection, setRowSelection] = useState<GridRowSelectionModel>([])
-  const [list, setList] = useState([])
-  const columns: GridColDef<(typeof list)[number]>[] = [
+  const columns: GridColDef<(typeof rows)[number]>[] = [
     { headerName: '댓글 URL', field: 'link', flex: 1 },
     { headerName: '댓글 내용', field: 'cont', flex: 1 },
     { headerName: '댓글 등록일시', field: 'regDate', flex: 1 },
@@ -29,7 +28,7 @@ export default function PostReply() {
 
     http.get('/postreply', { params: listPostReplyDto })
     .then(resp => {
-      setList(deepCopy(resp.data).map(d => {
+      setRows(deepCopy(resp.data).map(d => {
         d.link = `/post/${d.parentId}`
         d.regDate = dayjs(d.regDate).format('YYYY-MM-DD HH:mm:ss')
 
@@ -40,7 +39,7 @@ export default function PostReply() {
       }))
     })
   }
-  useEffect(listPostReplyAll, [])
+  useEffect(listPostReplyAll, [option])
 
   /** 삭제된 포스트 댓글 복구 */
   const restorePostReply = async () => {
@@ -55,23 +54,24 @@ export default function PostReply() {
     http.put('/postreply/restore', rowSelection)
     .then(() => {
       messageUtil.toastSuccess('복구되었습니다.')
+      listPostReplyAll()
     })
   }
 
   /** 조회조건 셀렉트박스 선택 시 실행 */
-  const handleOptionChange = (event: SelectChangeEvent) => {
-    setOption(event.target.value)
-    listPostReplyAll()
+  const handleOptionChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setOption(event.target.value as string)
   }
 
   return (
     <UI.DataGridContainer>
       <UI.DataGridButtonBox>
         <UI.SelectBox
-          label='조회조건'
+          // label='조회조건'
           labelId='postReplyOption'
+          name='option'
           value={option}
-          list={[
+          options={[
             { value: '',        text: '전체' },  
             { value: 'adminYn', text: '관리자 작성 댓글' },
             { value: 'delYn',   text: '삭제된 댓글' }
@@ -93,7 +93,7 @@ export default function PostReply() {
       </UI.DataGridButtonBox>
 
       <UI.DataGrid
-        rows={list}
+        rows={rows}
         columns={columns}
         initialState={{
           pagination: {
@@ -103,8 +103,12 @@ export default function PostReply() {
           }
         }}
         checkboxSelection
-        // disableRowSelectionOnClick
-        onRowSelectionModelChange={setRowSelection}
+        onRowSelectionModelChange={(rowSelectionModel: GridRowSelectionModel) => {
+          const newRowSelection = rows.filter(row => {
+            return rowSelectionModel.filter(rowId => rowId === row.id).length > 0
+          })
+          setRowSelection(newRowSelection)
+        }}
         onCellDoubleClick={(param,_) => {
           window.open(`${BLOG_URL}/content/${param.row.parentId}`)
         }}
