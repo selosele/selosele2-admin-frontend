@@ -10,8 +10,8 @@ import useCodeStore from '@/store/code'
 /** 만족도조사 관리 페이지 컴포넌트 */
 export default function Satisfaction() {
   const codeStore = useCodeStore()
-  const [list, setList] = useState([])
-  const columns: GridColDef<(typeof list)[number]>[] = [
+  const [rows, setRows] = useState([])
+  const columns: GridColDef<(typeof rows)[number]>[] = [
     { field: 'rownum' },
     { headerName: '페이지 URL', field: 'pagePath', flex: 1 },
     { headerName: '만족도 점수', field: 'score', flex: 1 },
@@ -23,7 +23,7 @@ export default function Satisfaction() {
   const listSatisfaction = (searchSatisfactionDto: SearchSatisfactionDto) => {
     http.get('/satisfaction', { params: searchSatisfactionDto })
     .then(resp => {
-      setList(deepCopy(resp.data).map(d => {
+      setRows(deepCopy(resp.data).map(d => {
         d.regDate = dayjs(d.regDate).format('YYYY-MM-DD HH:mm:ss')
         d.score = codeStore.data
           .filter(v => v.prefix === 'B01' && (v.val === d.score))
@@ -67,7 +67,7 @@ export default function Satisfaction() {
       </UI.DataGridButtonBox>
 
       <UI.DataGrid
-        rows={list}
+        rows={rows}
         columns={columns}
         initialState={{
           pagination: {

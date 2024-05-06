@@ -8,8 +8,8 @@ import dayjs from 'dayjs'
 /** 콘텐츠 관리 페이지 컴포넌트 */
 export default function Content() {
   const [rowSelection, setRowSelection] = useState<GridRowSelectionModel>([])
-  const [list, setList] = useState([])
-  const columns: GridColDef<(typeof list)[number]>[] = [
+  const [rows, setRows] = useState([])
+  const columns: GridColDef<(typeof rows)[number]>[] = [
     { headerName: '콘텐츠 URL', field: 'link', flex: 1 }, // width값 설정 시 minWidth 속성을 사용해야 함
     { headerName: '콘텐츠 제목', field: 'title', flex: 1 },
     { headerName: '콘텐츠 등록일시', field: 'regDate', flex: 1 },
@@ -20,7 +20,7 @@ export default function Content() {
   const listContent = () => {
     http.get('/content')
     .then(resp => {
-      setList(deepCopy(resp.data[0]).map(d => {
+      setRows(deepCopy(resp.data[0]).map(d => {
         d.regDate = dayjs(d.regDate).format('YYYY-MM-DD HH:mm:ss')
 
         if (isNotEmpty(d.modDate)) {
@@ -76,7 +76,7 @@ export default function Content() {
       </UI.DataGridButtonBox>
 
       <UI.DataGrid
-        rows={list}
+        rows={rows}
         columns={columns}
         initialState={{
           pagination: {

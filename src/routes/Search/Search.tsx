@@ -9,9 +9,9 @@ import dayjs from 'dayjs'
 /** 검색 관리 페이지 컴포넌트 */
 export default function Search() {
   const codeStore = useCodeStore()
-  const [list, setList] = useState([])
+  const [rows, setRows] = useState([])
   const [autoSaveDate, setAutoSaveDate] = useState(null)
-  const columns: GridColDef<(typeof list)[number]>[] = [
+  const columns: GridColDef<(typeof rows)[number]>[] = [
     { field: 'rownum' },
     { headerName: '유형', field: 'typeCdNm', flex: 1 }, // width값 설정 시 minWidth 속성을 사용해야 함
     { headerName: '자동 색인 여부', field: 'autoYnNm', flex: 1 },
@@ -32,7 +32,7 @@ export default function Search() {
   const listIndexSearchLog = () => {
     http.get('/indexsearchlog')
     .then(resp => {
-      setList(deepCopy(resp.data).map(d => {
+      setRows(deepCopy(resp.data).map(d => {
         d.startDate = dayjs(d.startDate).format('YYYY-MM-DD HH:mm:ss')
         d.endDate = dayjs(d.endDate).format('YYYY-MM-DD HH:mm:ss')
         d.autoYnNm = getAutoYn(d.autoYn)
@@ -64,11 +64,11 @@ export default function Search() {
   }, [codeStore.data])
 
   useEffect(() => {
-    const autoY = list.filter(d => d.autoYn === 'Y')
+    const autoY = rows.filter(d => d.autoYn === 'Y')
     if (autoY.length > 0) {
       setAutoSaveDate(autoY[0].endDate)
     }
-  }, [list])
+  }, [rows])
 
   return (
     <UI.DataGridContainer>
@@ -88,7 +88,7 @@ export default function Search() {
       </UI.DataGridButtonBox>
 
       <UI.DataGrid
-        rows={list}
+        rows={rows}
         columns={columns}
         initialState={{
           pagination: {
