@@ -12,6 +12,7 @@ import { CssBaseline, Divider, Drawer, List, ListItem, ListItemButton, ListItemT
 import { messageUtil, theme } from '@/utils'
 import useAuthStore from '@/store/auth'
 
+/** 레이아웃 탑메뉴 컴포넌트의 props 인터페이스 */
 interface Props {
   window?: () => Window
 }

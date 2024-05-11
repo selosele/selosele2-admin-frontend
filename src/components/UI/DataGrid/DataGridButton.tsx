@@ -4,6 +4,7 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import RefreshIcon from '@mui/icons-material/Refresh'
 import { theme } from '@/utils'
 
+/** 데이터그리드 버튼 컴포넌트의 props 인터페이스 */
 interface Props {
 
   /** 액션 유형 */

@@ -43,7 +43,7 @@ export default function Login() {
     <div className={`login__container`}>
       <div className={`login__form`}>
         <h1 className={`login__title`}>
-          관리자 로그인
+          블로그 ADMIN 시스템
         </h1>
 
         <form onSubmit={formik.handleSubmit}>
