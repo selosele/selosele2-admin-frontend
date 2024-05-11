@@ -1,3 +1,5 @@
+import { NativeSelectProps } from '@mui/material'
+
 /** 셀렉트박스 컴포넌트의 props 인터페이스 */
 export interface SelectBoxProps extends NativeSelectProps {
 

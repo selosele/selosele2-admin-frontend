@@ -12,7 +12,7 @@ import PrivateRoute from './PrivateRoute'
 import { NavigateFunction, Route, Routes, useNavigate } from 'react-router-dom'
 
 /** 페이지 컴포넌트 */
-export const Pages = {
+const Pages = {
   Login, Main, Code, Content,
   Search, Menu, Category,
   Satisfaction, PostReply, NotFound
