@@ -4,10 +4,12 @@ import { http } from '@/api'
 import { deepCopy, messageUtil } from '@/utils'
 import { UI } from '@/components/UI'
 import useCodeStore from '@/store/code'
+import useBreadcrumbStore from '@/store/breadcrumb'
 import dayjs from 'dayjs'
 
 /** 검색 관리 페이지 컴포넌트 */
 export default function Search() {
+  const breadcrumbStore = useBreadcrumbStore()
   const codeStore = useCodeStore()
   const [rows, setRows] = useState([])
   const [autoSaveDate, setAutoSaveDate] = useState(null)
@@ -56,6 +58,10 @@ export default function Search() {
       listIndexSearchLog()
     })
   }
+
+  useEffect(() => {
+    breadcrumbStore.setPageTitle('검색 관리')
+  }, [])
 
   useEffect(() => {
     if (codeStore.data.length > 0) {

@@ -4,10 +4,12 @@ import { UI } from '@/components/UI'
 import { BLOG_URL, deepCopy, isNotBlank, messageUtil } from '@/utils'
 import { http } from '@/api'
 import { ListPostReplyDto } from '@/models'
+import useBreadcrumbStore from '@/store/breadcrumb'
 import dayjs from 'dayjs'
 
 /** 포스트 댓글 관리 페이지 컴포넌트 */
 export default function PostReply() {
+  const breadcrumbStore = useBreadcrumbStore()
   const [option, setOption] = useState('')
   const [rows, setRows] = useState([])
   const [rowSelection, setRowSelection] = useState<GridRowSelectionModel>([])
@@ -39,7 +41,12 @@ export default function PostReply() {
       }))
     })
   }
+
   useEffect(listPostReplyAll, [option])
+  
+  useEffect(() => {
+    breadcrumbStore.setPageTitle('포스트 댓글 관리')
+  }, [])
 
   /** 삭제된 포스트 댓글 복구 */
   const restorePostReply = async () => {

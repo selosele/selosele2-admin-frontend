@@ -3,10 +3,12 @@ import { GridColDef, GridRowSelectionModel } from '@mui/x-data-grid'
 import { http } from '@/api'
 import { UI } from '@/components/UI'
 import { BLOG_URL, deepCopy, isNotEmpty, messageUtil } from '@/utils'
+import useBreadcrumbStore from '@/store/breadcrumb'
 import dayjs from 'dayjs'
 
 /** 콘텐츠 관리 페이지 컴포넌트 */
 export default function Content() {
+  const breadcrumbStore = useBreadcrumbStore()
   const [rowSelection, setRowSelection] = useState<GridRowSelectionModel>([])
   const [rows, setRows] = useState([])
   const columns: GridColDef<(typeof rows)[number]>[] = [
@@ -30,6 +32,11 @@ export default function Content() {
       }))
     })
   }
+  
+  useEffect(() => {
+    breadcrumbStore.setPageTitle('콘텐츠 관리')
+  }, [])
+  
   useEffect(listContent, [])
 
   /** 콘텐츠 삭제 */

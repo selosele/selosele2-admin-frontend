@@ -6,9 +6,11 @@ import { http } from '@/api'
 import { deepCopy } from '@/utils'
 import { SearchSatisfactionDto } from '@/models'
 import useCodeStore from '@/store/code'
+import useBreadcrumbStore from '@/store/breadcrumb'
 
 /** 만족도조사 관리 페이지 컴포넌트 */
 export default function Satisfaction() {
+  const breadcrumbStore = useBreadcrumbStore()
   const codeStore = useCodeStore()
   const [rows, setRows] = useState([])
   const columns: GridColDef<(typeof rows)[number]>[] = [
@@ -33,6 +35,10 @@ export default function Satisfaction() {
       }))
     })
   }
+
+  useEffect(() => {
+    breadcrumbStore.setPageTitle('만족도조사 관리')
+  }, [])
 
   useEffect(() => {
     if (codeStore.data.length > 0) {
