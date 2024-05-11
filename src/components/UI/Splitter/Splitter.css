@@ -1,0 +1,13 @@
+.splitter .pane:last-child {
+  overflow: visible
+}
+
+.splitter .pane:only-child {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+}
+
+.pane ~ .pane .splitter__wrapper {
+  padding: 1rem;
+}

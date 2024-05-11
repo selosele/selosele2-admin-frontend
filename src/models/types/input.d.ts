@@ -1,4 +1,18 @@
-import { NativeSelectProps } from '@mui/material'
+import { NativeSelectProps, RadioGroupProps as RadioGroupComponentProps } from '@mui/material'
+
+/** radio 그룹 컴포넌트의 props 인터페이스 */
+export interface RadioGroupProps extends RadioGroupComponentProps {
+
+  /** label */
+  label?: string
+
+  /** label의 id */
+  labelid?: string // labelId로 작성 시 브라우저 console에 오류 출력됨
+
+  /** radio 목록 */
+  list?: Value[]
+
+}
 
 /** 셀렉트박스 컴포넌트의 props 인터페이스 */
 export interface SelectBoxProps extends NativeSelectProps {
@@ -19,20 +33,20 @@ export interface SelectBoxProps extends NativeSelectProps {
   defaultValue?: unknown
 
   /** option 태그 목록 */
-  options?: SelectBoxOption[]
+  options?: Value[]
 
   /** 셀렉트박스의 change 이벤트 */
   onChange?: any
 
 }
 
-/** 셀렉트박스 option 태그 목록 */
-export interface SelectBoxOption {
+/** 입력필드의 value 값 목록 */
+export interface Value {
 
-  /** 셀렉트박스 값 */
+  /** value */
   value?: any
 
-  /** 셀렉트박스 텍스트 */
+  /** 내용 */
   text?: string
 
 }
