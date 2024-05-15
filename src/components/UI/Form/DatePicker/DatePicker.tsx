@@ -5,10 +5,10 @@ import { DatePicker as DatePickerComponent } from '@mui/x-date-pickers/DatePicke
 import { BaseNonStaticPickerProps } from '@mui/x-date-pickers/internals'
 
 /** 날짜입력필드 컴포넌트의 props 인터페이스 */
-interface DatePickerProps extends BaseNonStaticPickerProps {}
+interface Props extends BaseNonStaticPickerProps {}
 
 /** 날짜입력필드 컴포넌트 */
-export default function DatePicker(props: DatePickerProps) {
+export default function DatePicker(props: Props) {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer components={['DatePicker']}>
