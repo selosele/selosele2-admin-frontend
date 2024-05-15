@@ -89,14 +89,9 @@ export default function Code() {
         <UI.SplitterPane>
           <CodeDetail
             data={codeDetail}
+            close={setIsSplitterActive}
+            key={codeDetail.id}
           />
-
-          <Button
-            variant='contained'
-            onClick={() => setIsSplitterActive(false)}
-          >
-            닫기
-          </Button>
         </UI.SplitterPane>
       )}
     </UI.Splitter>
