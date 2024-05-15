@@ -9,6 +9,12 @@ export interface RadioGroupProps extends RadioGroupComponentProps {
   /** label의 id */
   labelid?: string // labelId로 작성 시 브라우저 console에 오류 출력됨
 
+  /** 오류 메시지 표출 여부 */
+  //error?: boolean
+
+  /** 도움말 문구 */
+  //helperText?: React.ReactNode
+
   /** radio 목록 */
   list?: Value[]
 
