@@ -5,3 +5,7 @@
 .swal2-container {
   z-index: 9999;
 }
+
+.detail-container .MuiFormControl-root {
+  margin-bottom: 1rem;
+}

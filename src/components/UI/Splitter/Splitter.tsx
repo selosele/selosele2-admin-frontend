@@ -5,7 +5,7 @@ import 'm-react-splitters/lib/splitters.css'
 import './Splitter.css'
 
 /** splitter 컴포넌트의 props 인터페이스 */
-interface SplitterProps {
+interface Props {
 
   /** splitter의 children */
   children?: Children | {} | any
@@ -13,12 +13,10 @@ interface SplitterProps {
 }
 
 /** splitter 컴포넌트 */
-export default function Splitter(props: SplitterProps) {
+export default function Splitter(props: Props) {
   return (
     <SplitterComponent
       position='vertical'
-      // primaryPaneWidth={0}
-      // primaryPaneMinWidth={0}
       {...props}
     >    
       {props.children}
