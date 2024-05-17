@@ -20,13 +20,13 @@ interface Props {
 const drawerWidth = 240
 const siteTitle = '블로그 ADMIN 시스템'
 const navItems = [
-  { to: '/code', name: '공통코드 관리' },
-  { to: '/menu', name: '메뉴 관리' },
-  { to: '/category', name: '카테고리/태그 관리' },
-  { to: '/post-reply', name: '포스트 댓글 관리' },
-  { to: '/content', name: '콘텐츠 관리' },
+  { to: '/code',         name: '공통코드 관리' },
+  { to: '/menu',         name: '메뉴 관리' },
+  { to: '/category',     name: '카테고리/태그 관리' },
+  { to: '/post-reply',   name: '포스트 댓글 관리' },
+  { to: '/content',      name: '콘텐츠 관리' },
   { to: '/satisfaction', name: '만족도조사 관리' },
-  { to: '/search', name: '검색 관리' },
+  { to: '/search',       name: '검색 관리' },
   // { to: '/program', name: '프로그램 관리' }
 ]
 

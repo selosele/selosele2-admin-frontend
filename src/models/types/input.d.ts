@@ -3,7 +3,7 @@ import { NativeSelectProps, RadioGroupProps as RadioGroupComponentProps } from '
 /** 입력필드의 value 값 목록 */
 export interface Value {
 
-  /** value */
+  /** 값 */
   value?: any
 
   /** 내용 */

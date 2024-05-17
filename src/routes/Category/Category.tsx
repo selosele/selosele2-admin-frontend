@@ -14,6 +14,8 @@ export default function Category() {
   const [tabIndex, setTabIndex] = useState('0')
   const [isSplitterActive, setIsSplitterActive] = useState(true)
   const [categoryDetail, setCategoryDetail] = useState(null as CategoryData)
+  const [categoryTree, setCategoryTree] = useState([] as TreeNode[])
+  const [tagTree, setTagTree] = useState([] as TreeNode[])
   const [type, setType] = useState('')
 
   /** 탭 클릭 이벤트 핸들러 */
@@ -26,7 +28,7 @@ export default function Category() {
   }
 
   /** 카테고리-포스트 계층형 구조 조회 */
-  const listCategoryTreeAndPost = async () => {
+  const listCategoryTreeAndPost = async (): Promise<void> => {
     http.get('/category/list/tree')
     .then(resp => {
       createTree(resp.data, 'D01004')
@@ -34,7 +36,7 @@ export default function Category() {
   }
 
   /** 태그-포스트 계층형 구조 조회 */
-  const listTagTreeAndPost = async () => {
+  const listTagTreeAndPost = async (): Promise<void> => {
     http.get('/tag/list/tree')
     .then(resp => {
       createTree(resp.data, 'D01005')
@@ -59,9 +61,6 @@ export default function Category() {
     }
     fetchData()
   }, [])
-
-  const [categoryTree, setCategoryTree] = useState([] as TreeNode[])
-  const [tagTree, setTagTree] = useState([] as TreeNode[])
 
   let categoryArr = []
   let tagArr = []
@@ -159,7 +158,7 @@ export default function Category() {
   }
 
   /** 트리 갱신 */
-  const refreshTree = async () => {
+  const refreshTree = async (): Promise<void> => {
     resetCategory()
     setCategoryTree([])
     setTagTree([])

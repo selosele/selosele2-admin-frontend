@@ -1,3 +1,6 @@
+import { NavigateFunction, Route, Routes, useNavigate } from 'react-router-dom'
+import PrivateRoute from './PrivateRoute'
+import NotFound from './NotFound/NotFound'
 import Login from './Login/Login'
 import Main from './Main/Main'
 import Code from './Code/Code'
@@ -7,9 +10,6 @@ import Menu from './Menu/Menu'
 import Category from './Category/Category'
 import Satisfaction from './Satisfaction/Satisfaction'
 import PostReply from './PostReply/PostReply'
-import NotFound from './NotFound/NotFound'
-import PrivateRoute from './PrivateRoute'
-import { NavigateFunction, Route, Routes, useNavigate } from 'react-router-dom'
 
 /** 페이지 컴포넌트 */
 const Pages = {

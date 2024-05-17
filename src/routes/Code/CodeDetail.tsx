@@ -17,7 +17,9 @@ interface Props {
 
 /** 공통코드 상세 조회 컴포넌트 */
 export default function CodeDetail(props: Props) {
-  const formik = useFormik({
+
+  /** 공통코드 저장 폼 */
+  const saveCodeForm = useFormik({
     initialValues: {
       /** 코드 ID */
       id: props.data?.id || '',
@@ -54,12 +56,12 @@ export default function CodeDetail(props: Props) {
     onSubmit: async (values, { setSubmitting }) => {
       setSubmitting(true)
       console.log(values)
-    },
+    }
   })
 
   return (
     <UI.SplitForm
-      form={formik}
+      form={saveCodeForm}
       btnSave={false}
       onClose={() => props.close(false)}
     >
@@ -67,10 +69,10 @@ export default function CodeDetail(props: Props) {
         <TextField
           label='코드 ID'
           name='id'
-          value={formik.values.id}
-          onChange={formik.handleChange}
-          error={formik.touched.id && Boolean(formik.errors.id)}
-          helperText={formik.touched.id && formik.errors.id}
+          value={saveCodeForm.values.id}
+          onChange={saveCodeForm.handleChange}
+          error={saveCodeForm.touched.id && Boolean(saveCodeForm.errors.id)}
+          helperText={saveCodeForm.touched.id && saveCodeForm.errors.id}
           variant='standard' fullWidth
           inputProps={
             { disabled: true }
@@ -80,10 +82,10 @@ export default function CodeDetail(props: Props) {
         <TextField
           label='코드 접두어'
           name='prefix'
-          value={formik.values.prefix}
-          onChange={formik.handleChange}
-          error={formik.touched.prefix && Boolean(formik.errors.prefix)}
-          helperText={formik.touched.prefix && formik.errors.prefix}
+          value={saveCodeForm.values.prefix}
+          onChange={saveCodeForm.handleChange}
+          error={saveCodeForm.touched.prefix && Boolean(saveCodeForm.errors.prefix)}
+          helperText={saveCodeForm.touched.prefix && saveCodeForm.errors.prefix}
           variant='standard' fullWidth
           inputProps={
             { disabled: true }
@@ -93,10 +95,10 @@ export default function CodeDetail(props: Props) {
         <TextField
           label='코드 값'
           name='val'
-          value={formik.values.val}
-          onChange={formik.handleChange}
-          error={formik.touched.val && Boolean(formik.errors.val)}
-          helperText={formik.touched.val && formik.errors.val}
+          value={saveCodeForm.values.val}
+          onChange={saveCodeForm.handleChange}
+          error={saveCodeForm.touched.val && Boolean(saveCodeForm.errors.val)}
+          helperText={saveCodeForm.touched.val && saveCodeForm.errors.val}
           variant='standard' fullWidth
           inputProps={
             { disabled: true }
@@ -106,10 +108,10 @@ export default function CodeDetail(props: Props) {
         <TextField
           label='코드 명'
           name='nm'
-          value={formik.values.nm}
-          onChange={formik.handleChange}
-          error={formik.touched.nm && Boolean(formik.errors.nm)}
-          helperText={formik.touched.nm && formik.errors.nm}
+          value={saveCodeForm.values.nm}
+          onChange={saveCodeForm.handleChange}
+          error={saveCodeForm.touched.nm && Boolean(saveCodeForm.errors.nm)}
+          helperText={saveCodeForm.touched.nm && saveCodeForm.errors.nm}
           variant='standard' fullWidth
           inputProps={
             { disabled: true }
@@ -120,10 +122,10 @@ export default function CodeDetail(props: Props) {
           multiline
           label='코드 설명'
           name='desc'
-          value={formik.values.desc}
-          onChange={formik.handleChange}
-          error={formik.touched.desc && Boolean(formik.errors.desc)}
-          helperText={formik.touched.desc && formik.errors.desc}
+          value={saveCodeForm.values.desc}
+          onChange={saveCodeForm.handleChange}
+          error={saveCodeForm.touched.desc && Boolean(saveCodeForm.errors.desc)}
+          helperText={saveCodeForm.touched.desc && saveCodeForm.errors.desc}
           variant='standard' fullWidth
           inputProps={
             { disabled: true }
@@ -135,8 +137,8 @@ export default function CodeDetail(props: Props) {
           label='코드 사용 여부'
           labelid='codeUseYn'
           name='useYn'
-          value={formik.values.useYn}
-          onChange={formik.handleChange}
+          value={saveCodeForm.values.useYn}
+          onChange={saveCodeForm.handleChange}
           disabled={true}
           list={[
             { value: 'Y', text: '사용' },

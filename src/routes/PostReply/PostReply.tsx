@@ -20,7 +20,7 @@ export default function PostReply() {
   ]
 
   /** 포스트 댓글 목록 조회 */
-  const listPostReplyAll = () => {
+  const listPostReplyAll = (): void => {
     let listPostReplyDto: ListPostReplyDto = {}
 
     if (isNotBlank(option)) {
@@ -48,7 +48,7 @@ export default function PostReply() {
   }, [])
 
   /** 삭제된 포스트 댓글 복구 */
-  const restorePostReply = async () => {
+  const restorePostReply = async (): Promise<void> => {
     if (rowSelection.length === 0) {
       messageUtil.toastWarning('항목을 선택하세요.')
       return
@@ -65,7 +65,7 @@ export default function PostReply() {
   }
 
   /** 조회조건 셀렉트박스 선택 시 실행 */
-  const handleOptionChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+  const handleOptionChange = (event: React.ChangeEvent<{ value: unknown }>): void => {
     setOption(event.target.value as string)
   }
 

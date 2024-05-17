@@ -30,7 +30,7 @@ export default function Search() {
   }
 
   /** 검색 색인 로그 목록 조회 */
-  const listIndexSearchLog = () => {
+  const listIndexSearchLog = (): void => {
     http.get('/indexsearchlog')
     .then(resp => {
       setRows(deepCopy(resp.data).map(d => {
@@ -47,7 +47,7 @@ export default function Search() {
   }
 
   /** 검색 색인 데이터 저장 */
-  const saveIndexSearch = async () => {
+  const saveIndexSearch = async (): Promise<void> => {
     const confirm = await messageUtil.confirmSuccess('데이터를 색인하시겠습니까?')
     if (!confirm) return
 

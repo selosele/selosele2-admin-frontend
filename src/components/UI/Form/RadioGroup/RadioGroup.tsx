@@ -21,7 +21,7 @@ export interface Props extends RadioGroupComponentProps {
 /** radio 그룹 컴포넌트 */
 export default function RadioGroup(props: Props) {
   return (
-    <FormControl>
+    <FormControl sx={{ display: 'flex' }}>
       <FormLabel id={props.labelid}>
         {props.label}
       </FormLabel>

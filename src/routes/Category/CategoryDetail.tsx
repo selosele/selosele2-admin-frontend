@@ -33,7 +33,8 @@ export default function CategoryDetail(props: Props) {
     if (props.type === 'D01005') setText('태그')
   }, [])
 
-  const formik = useFormik({
+  /** 카테고리 저장 폼 */
+  const saveCategoryForm = useFormik({
     initialValues: {
       /** 카테고리/태그 ID */
       id: props.data?.id,
@@ -51,7 +52,7 @@ export default function CategoryDetail(props: Props) {
         .required('필수 입력 항목입니다')
         .max(50, '최대 50글자 이하여야 합니다'),
       desc: Yup.string()
-        .max(100, '최대 100글자 이하여야 합니다'),
+        .max(100, '최대 100글자 이하여야 합니다')
     }),
     onSubmit: async (values, { setSubmitting }) => {
       setSubmitting(true)
@@ -66,11 +67,11 @@ export default function CategoryDetail(props: Props) {
         // 있으면 수정 API를 탄다.
         await updateCategory(values)
       }
-    },
+    }
   })
 
   /** 카테고리 등록 */
-  const addCategory = async (values) => {
+  const addCategory = async (values): Promise<void> => {
     return http.post(getApiUri(), values)
     .then(() => {
       messageUtil.toastSuccess('저장되었습니다.')
@@ -79,7 +80,7 @@ export default function CategoryDetail(props: Props) {
   }
 
   /** 카테고리 수정 */
-  const updateCategory = async (values) => {
+  const updateCategory = async (values): Promise<void> => {
     return http.put(getApiUri(), values)
     .then(() => {
       messageUtil.toastSuccess('저장되었습니다.')
@@ -88,7 +89,7 @@ export default function CategoryDetail(props: Props) {
   }
 
   /** 카테고리/태그 삭제 */
-  const onRemove = async (values) => {
+  const onRemove = async (values): Promise<void> => {
     if (isEmpty(values.id)) return
 
     const confirm = await messageUtil.confirmSuccess('삭제하시겠습니까?')
@@ -102,7 +103,7 @@ export default function CategoryDetail(props: Props) {
   }
 
   /** 페이지 유형에 따른 API 호출 URI 반환 */
-  const getApiUri = () => {
+  const getApiUri = (): string => {
     if (props.type === 'D01004') return '/category'
     if (props.type === 'D01005') return '/tag'
     return ''
@@ -110,42 +111,42 @@ export default function CategoryDetail(props: Props) {
 
   return (
     <UI.SplitForm
-      form={formik}
+      form={saveCategoryForm}
       btnRemove={true}
-      onRemove={() => onRemove(formik.values)}
+      onRemove={() => onRemove(saveCategoryForm.values)}
       onClose={() => props.close(false)}
     >
       <div className={`detail-container`}>
-        <input type='hidden' name='id' value={formik.values.id} />
-        <input type='hidden' name='type' value={formik.values.type} />
+        <input type='hidden' name='id' value={saveCategoryForm.values.id} />
+        <input type='hidden' name='type' value={saveCategoryForm.values.type} />
 
         <TextField
           label={`${text} 명`}
           name='nm'
-          value={formik.values.nm}
-          onChange={formik.handleChange}
-          error={formik.touched.nm && Boolean(formik.errors.nm)}
-          helperText={formik.touched.nm && formik.errors.nm}
+          value={saveCategoryForm.values.nm}
+          onChange={saveCategoryForm.handleChange}
+          error={saveCategoryForm.touched.nm && Boolean(saveCategoryForm.errors.nm)}
+          helperText={saveCategoryForm.touched.nm && saveCategoryForm.errors.nm}
           variant='standard' fullWidth
         />
 
         <TextField
           label={`${text} 설명`}
           name='desc'
-          value={formik.values.desc}
-          onChange={formik.handleChange}
-          error={formik.touched.desc && Boolean(formik.errors.desc)}
-          helperText={formik.touched.desc && formik.errors.desc}
+          value={saveCategoryForm.values.desc}
+          onChange={saveCategoryForm.handleChange}
+          error={saveCategoryForm.touched.desc && Boolean(saveCategoryForm.errors.desc)}
+          helperText={saveCategoryForm.touched.desc && saveCategoryForm.errors.desc}
           variant='standard' fullWidth
         />
 
         <TextField
           label={`${text} 등록일시`}
           name='regDate'
-          value={formik.values.regDate}
-          onChange={formik.handleChange}
-          error={formik.touched.regDate && Boolean(formik.errors.regDate)}
-          helperText={formik.touched.regDate && formik.errors.regDate}
+          value={saveCategoryForm.values.regDate}
+          onChange={saveCategoryForm.handleChange}
+          error={saveCategoryForm.touched.regDate && Boolean(saveCategoryForm.errors.regDate)}
+          helperText={saveCategoryForm.touched.regDate && saveCategoryForm.errors.regDate}
           variant='standard' fullWidth
           inputProps={
             { readOnly: true }

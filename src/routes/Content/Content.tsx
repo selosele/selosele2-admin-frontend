@@ -18,7 +18,7 @@ export default function Content() {
   ]
 
   /** 콘텐츠 목록 조회 */
-  const listContent = () => {
+  const listContent = (): void => {
     http.get('/content')
     .then(resp => {
       setRows(deepCopy(resp.data[0]).map(d => {
@@ -39,7 +39,7 @@ export default function Content() {
   useEffect(listContent, [])
 
   /** 콘텐츠 삭제 */
-  const removeContents = async () => {
+  const removeContents = async (): Promise<void> => {
     if (rowSelection.length === 0) {
       messageUtil.toastWarning('삭제할 콘텐츠를 선택하세요.')
       return

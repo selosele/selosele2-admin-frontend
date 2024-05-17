@@ -10,7 +10,8 @@ import './Login.css'
 export default function Login() {
   const navigate = useNavigate()
   
-  const formik = useFormik({
+  /** 로그인 폼 */
+  const loginForm = useFormik({
     initialValues: {
       /** 사용자 아이디 */
       userId: '',
@@ -24,7 +25,7 @@ export default function Login() {
       userPw: Yup.string()
         .required('필수 입력 항목입니다')
         .min(8, '최소 8글자 이상이어야 합니다')
-        .max(10, '최대 10글자 이하여야 합니다'),
+        .max(10, '최대 10글자 이하여야 합니다')
     }),
     onSubmit: async (values, { setSubmitting }) => {
       setSubmitting(true)
@@ -36,7 +37,7 @@ export default function Login() {
         window.localStorage.setItem('accessToken', accessToken)
         navigate('/')
       }
-    },
+    }
   })
 
   return (
@@ -46,15 +47,15 @@ export default function Login() {
           블로그 ADMIN 시스템
         </h1>
 
-        <form onSubmit={formik.handleSubmit}>
+        <form onSubmit={loginForm.handleSubmit}>
           <div className={`login__input-item`}>
             <TextField
               name='userId'
               placeholder='아이디'
-              value={formik.values.userId}
-              onChange={formik.handleChange}
-              error={formik.touched.userId && Boolean(formik.errors.userId)}
-              helperText={formik.touched.userId && formik.errors.userId}
+              value={loginForm.values.userId}
+              onChange={loginForm.handleChange}
+              error={loginForm.touched.userId && Boolean(loginForm.errors.userId)}
+              helperText={loginForm.touched.userId && loginForm.errors.userId}
               variant='standard' fullWidth
             />
           </div> 
@@ -64,10 +65,10 @@ export default function Login() {
               type='password'
               name='userPw'
               placeholder='비밀번호'
-              value={formik.values.userPw}
-              onChange={formik.handleChange}
-              error={formik.touched.userPw && Boolean(formik.errors.userPw)}
-              helperText={formik.touched.userPw && formik.errors.userPw}
+              value={loginForm.values.userPw}
+              onChange={loginForm.handleChange}
+              error={loginForm.touched.userPw && Boolean(loginForm.errors.userPw)}
+              helperText={loginForm.touched.userPw && loginForm.errors.userPw}
               variant='standard' fullWidth
             />
           </div>
