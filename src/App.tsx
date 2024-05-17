@@ -3,12 +3,8 @@ import { ThemeProvider } from '@mui/material'
 import { theme } from './utils'
 import { GlobalRouter } from './routes'
 import useCodeStore from './store/code'
-import dayjs from 'dayjs'
-import 'dayjs/locale/ko'
 
 import './App.css'
-
-dayjs.locale('ko')
 
 export default function App() {
   const codeStore = useCodeStore()

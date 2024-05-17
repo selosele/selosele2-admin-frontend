@@ -4,10 +4,9 @@ import { TabContext, TabList, TabPanel } from '@mui/lab'
 import { UI } from '@/components/UI'
 import { http } from '@/api'
 import { Category as CategoryData, TreeNode } from '@/models'
-import { BLOG_URL, deepCopy, isEmpty } from '@/utils'
+import { BLOG_URL, datetime, deepCopy, isEmpty } from '@/utils'
 import useBreadcrumbStore from '@/store/breadcrumb'
 import CategoryDetail from './CategoryDetail'
-import dayjs from 'dayjs'
 
 /** 카테고리/태그 관리 페이지 컴포넌트 */
 export default function Category() {
@@ -20,6 +19,7 @@ export default function Category() {
   /** 탭 클릭 이벤트 핸들러 */
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setTabIndex(newValue)
+    setCategoryDetail(null)
 
     if (newValue === '0') setType('category')
     if (newValue === '1') setType('tag')
@@ -138,7 +138,7 @@ export default function Category() {
     return http.get(`/${type}/${node.id}`)
     .then(resp => {
       const detail: CategoryData = deepCopy(resp.data)
-      detail.regDate = dayjs(detail.regDate).format('YYYY-MM-DD HH:mm:ss')
+      detail.regDate = datetime(detail.regDate).format('YYYY-MM-DD HH:mm:ss')
       setCategoryDetail({ ...detail })
     })
   }

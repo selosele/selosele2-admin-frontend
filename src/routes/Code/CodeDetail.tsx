@@ -73,7 +73,7 @@ export default function CodeDetail(props: Props) {
           helperText={formik.touched.id && formik.errors.id}
           variant='standard' fullWidth
           inputProps={
-            { readOnly: true }
+            { disabled: true }
           }
         />
   
@@ -86,7 +86,7 @@ export default function CodeDetail(props: Props) {
           helperText={formik.touched.prefix && formik.errors.prefix}
           variant='standard' fullWidth
           inputProps={
-            { readOnly: true }
+            { disabled: true }
           }
         />
   
@@ -99,7 +99,7 @@ export default function CodeDetail(props: Props) {
           helperText={formik.touched.val && formik.errors.val}
           variant='standard' fullWidth
           inputProps={
-            { readOnly: true }
+            { disabled: true }
           }
         />
   
@@ -112,7 +112,7 @@ export default function CodeDetail(props: Props) {
           helperText={formik.touched.nm && formik.errors.nm}
           variant='standard' fullWidth
           inputProps={
-            { readOnly: true }
+            { disabled: true }
           }
         />
   
@@ -126,7 +126,7 @@ export default function CodeDetail(props: Props) {
           helperText={formik.touched.desc && formik.errors.desc}
           variant='standard' fullWidth
           inputProps={
-            { readOnly: true }
+            { disabled: true }
           }
         />
   
@@ -134,17 +134,14 @@ export default function CodeDetail(props: Props) {
           row
           label='코드 사용 여부'
           labelid='codeUseYn'
+          name='useYn'
           value={formik.values.useYn}
           onChange={formik.handleChange}
-          // error={formik.touched.useYn && Boolean(formik.errors.useYn)}
-          // helperText={formik.touched.useYn && formik.errors.useYn}
+          disabled={true}
           list={[
             { value: 'Y', text: '사용' },
             { value: 'N', text: '미사용' }
           ]}
-          // inputProps={
-          //   { readOnly: true }
-          // }
         />
       </div>
     </UI.SplitForm>

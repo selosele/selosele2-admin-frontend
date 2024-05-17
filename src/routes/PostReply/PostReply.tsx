@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react'
 import { GridColDef, GridRowSelectionModel } from '@mui/x-data-grid'
 import { UI } from '@/components/UI'
-import { BLOG_URL, deepCopy, isNotBlank, messageUtil } from '@/utils'
+import { BLOG_URL, datetime, deepCopy, isNotBlank, messageUtil } from '@/utils'
 import { http } from '@/api'
 import { ListPostReplyDto } from '@/models'
 import useBreadcrumbStore from '@/store/breadcrumb'
-import dayjs from 'dayjs'
 
 /** 포스트 댓글 관리 페이지 컴포넌트 */
 export default function PostReply() {
@@ -32,10 +31,10 @@ export default function PostReply() {
     .then(resp => {
       setRows(deepCopy(resp.data).map(d => {
         d.link = `/post/${d.parentId}`
-        d.regDate = dayjs(d.regDate).format('YYYY-MM-DD HH:mm:ss')
+        d.regDate = datetime(d.regDate).format('YYYY-MM-DD HH:mm:ss')
 
         if (isNotBlank(d.modDate)) {
-          d.modDate = dayjs(d.modDate).format('YYYY-MM-DD HH:mm:ss')
+          d.modDate = datetime(d.modDate).format('YYYY-MM-DD HH:mm:ss')
         }
         return d
       }))

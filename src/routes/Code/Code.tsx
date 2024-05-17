@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { GridCellParams, GridColDef } from '@mui/x-data-grid'
-import { Button } from '@mui/material'
 import { UI } from '@/components/UI'
 import { http } from '@/api'
 import { deepCopy } from '@/utils'
@@ -11,8 +10,8 @@ import CodeDetail from './CodeDetail'
 export default function Code() {
   const breadcrumbStore = useBreadcrumbStore()
   const [isSplitterActive, setIsSplitterActive] = useState(false)
-  const [rows, setRows] = useState([])
   const [codeDetail, setCodeDetail] = useState(null)
+  const [rows, setRows] = useState([])
   const columns: GridColDef<(typeof rows)[number]>[] = [
     { field: 'rownum' },
     { headerName: '코드 ID', field: 'id', flex: 1 },
@@ -32,7 +31,7 @@ export default function Code() {
   }
 
   /** 공통코드 목록 조회 */
-  const listCode = () => {
+  const listCode = (): void => {
     http.get('/code')
     .then(resp => {
       setRows(deepCopy(resp.data).map(d => {
@@ -43,7 +42,7 @@ export default function Code() {
   }
 
   /** 공통코드 상세 조회 */
-  const getCode = (id: string) => {
+  const getCode = (id: string): void => {
     http.get(`/code/${id}`)
     .then(resp => {
       setCodeDetail(resp.data)

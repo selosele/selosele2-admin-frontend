@@ -5,7 +5,12 @@ import { DatePicker as DatePickerComponent } from '@mui/x-date-pickers/DatePicke
 import { BaseNonStaticPickerProps } from '@mui/x-date-pickers/internals'
 
 /** 날짜입력필드 컴포넌트의 props 인터페이스 */
-interface Props extends BaseNonStaticPickerProps {}
+interface Props extends BaseNonStaticPickerProps {
+
+  /** 날짜입력 이벤트 핸들러 함수 */
+  onChange?: (value: any) => void
+
+}
 
 /** 날짜입력필드 컴포넌트 */
 export default function DatePicker(props: Props) {
@@ -14,7 +19,7 @@ export default function DatePicker(props: Props) {
       <DemoContainer components={['DatePicker']}>
         <DatePickerComponent
           label='날짜를 선택하세요.'
-          format='YYYY-MM-DD'
+          format={props.format || 'YYYY-MM-DD'}
           slotProps={{
             textField: {
               size: 'small',

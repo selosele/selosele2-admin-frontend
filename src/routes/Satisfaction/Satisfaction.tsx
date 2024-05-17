@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react'
-import dayjs from 'dayjs'
 import { GridColDef } from '@mui/x-data-grid'
 import { UI } from '@/components/UI'
 import { http } from '@/api'
-import { deepCopy } from '@/utils'
+import { datetime, deepCopy } from '@/utils'
 import { SearchSatisfactionDto } from '@/models'
 import useCodeStore from '@/store/code'
 import useBreadcrumbStore from '@/store/breadcrumb'
@@ -22,11 +21,11 @@ export default function Satisfaction() {
   ]
 
   /** 만족도조사 목록 조회 */
-  const listSatisfaction = (searchSatisfactionDto: SearchSatisfactionDto) => {
+  const listSatisfaction = (searchSatisfactionDto: SearchSatisfactionDto): void => {
     http.get('/satisfaction', { params: searchSatisfactionDto })
     .then(resp => {
       setRows(deepCopy(resp.data).map(d => {
-        d.regDate = dayjs(d.regDate).format('YYYY-MM-DD HH:mm:ss')
+        d.regDate = datetime(d.regDate).format('YYYY-MM-DD HH:mm:ss')
         d.score = codeStore.data
           .filter(v => v.prefix === 'B01' && (v.val === d.score))
           .map(v => v.nm)
@@ -52,7 +51,7 @@ export default function Satisfaction() {
         <UI.DatePicker
           onChange={(regDate: string) => listSatisfaction({
             isToday: 'N',
-            regDate: dayjs(regDate).format('YYYY-MM-DD')
+            regDate: datetime(regDate).format('YYYY-MM-DD')
           })}
         />
 
