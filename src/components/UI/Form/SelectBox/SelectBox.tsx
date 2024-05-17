@@ -20,7 +20,7 @@ export interface Props extends NativeSelectProps {
   value?: unknown
 
   /** 셀렉트박스의 기본 value */
-  defaultValue?: unknown
+  defaultValue?: Value
 
   /** option 태그 목록 */
   options?: Value[]
@@ -32,22 +32,31 @@ export interface Props extends NativeSelectProps {
 
 /** 셀렉트박스 컴포넌트 */
 export default function SelectBox(props: Props) {
+  let options: Value[] = []
+
+  if (props?.defaultValue) {
+    options.push(props.defaultValue)
+  }
+
+  if (props.options?.length) {
+    props.options.forEach(d => options.push(d))
+  }
+
   return (
     <Box sx={{ minWidth: 120 }}>
-      <FormControl>
+      <FormControl style={{ width: '100%' }}>
         <InputLabel variant='filled' size='small' htmlFor={props.labelId}>
           {props.label}
         </InputLabel>
         <NativeSelect
           value={props.value}
-          defaultValue={props.defaultValue}
           inputProps={{
             name: props.name,
             id: props.labelId
           }}
           onChange={props.onChange}
         >
-          {props.options?.length > 0 && props.options.map((item,index) => (
+          {options.length > 0 && options.map((item,index) => (
             <option key={index} value={item.value}>
               {item.text}
             </option>
