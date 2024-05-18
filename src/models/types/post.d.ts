@@ -35,13 +35,13 @@ export interface Post {
   ogDesc?: string
   
   /** 포스트 비공개 여부 */
-  secretYn?: string
+  secretYn?: 'Y' | 'N'
   
   /** 포스트 상단고정 여부 */
-  pinYn?: string
+  pinYn?: 'Y' | 'N'
 
   /** 포스트 임시저장 여부 */
-  tmpYn?: string
+  tmpYn?: 'Y' | 'N'
 
 }
 

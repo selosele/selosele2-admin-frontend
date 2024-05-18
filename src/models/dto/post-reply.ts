@@ -2,9 +2,9 @@
 export class ListPostReplyDto {
 
   /** 포스트 댓글 삭제 여부 */
-  delYn?: string
+  delYn?: 'Y' | 'N'
 
   /** 포스트 댓글 관리자 계정 여부 */
-  adminYn?: string
+  adminYn?: 'Y' | 'N'
 
 }
