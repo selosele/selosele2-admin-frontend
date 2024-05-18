@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { GridColDef } from '@mui/x-data-grid'
 import { UI } from '@/components/UI'
 import { http } from '@/api'
-import { datetimeUtil, deepCopy } from '@/utils'
+import { BLOG_URL, datetimeUtil, deepCopy } from '@/utils'
 import { SearchSatisfactionDto } from '@/models'
 import useCodeStore from '@/store/code'
 import useBreadcrumbStore from '@/store/breadcrumb'
@@ -80,6 +80,9 @@ export default function Satisfaction() {
               pageSize: 20
             }
           }
+        }}
+        onCellDoubleClick={(param,_) => {
+          window.open(`${BLOG_URL}${param.row.pagePath}`)
         }}
       />
     </UI.DataGridContainer>
