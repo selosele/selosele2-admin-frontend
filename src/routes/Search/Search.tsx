@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { GridColDef } from '@mui/x-data-grid'
 import { http } from '@/api'
-import { datetime, deepCopy, messageUtil } from '@/utils'
+import { datetimeUtil, deepCopy, messageUtil } from '@/utils'
 import { UI } from '@/components/UI'
 import useCodeStore from '@/store/code'
 import useBreadcrumbStore from '@/store/breadcrumb'
@@ -34,8 +34,8 @@ export default function Search() {
     http.get('/indexsearchlog')
     .then(resp => {
       setRows(deepCopy(resp.data).map(d => {
-        d.startDate = datetime(d.startDate).format('YYYY-MM-DD HH:mm:ss')
-        d.endDate = datetime(d.endDate).format('YYYY-MM-DD HH:mm:ss')
+        d.startDate = datetimeUtil(d.startDate).format('YYYY-MM-DD HH:mm:ss')
+        d.endDate = datetimeUtil(d.endDate).format('YYYY-MM-DD HH:mm:ss')
         d.autoYnNm = getAutoYn(d.autoYn)
         d.typeCdNm = codeStore.data
           .filter(v => v.prefix === 'D03')

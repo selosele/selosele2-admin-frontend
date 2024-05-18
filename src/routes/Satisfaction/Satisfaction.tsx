@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { GridColDef } from '@mui/x-data-grid'
 import { UI } from '@/components/UI'
 import { http } from '@/api'
-import { datetime, deepCopy } from '@/utils'
+import { datetimeUtil, deepCopy } from '@/utils'
 import { SearchSatisfactionDto } from '@/models'
 import useCodeStore from '@/store/code'
 import useBreadcrumbStore from '@/store/breadcrumb'
@@ -25,7 +25,7 @@ export default function Satisfaction() {
     http.get('/satisfaction', { params: searchSatisfactionDto })
     .then(resp => {
       setRows(deepCopy(resp.data).map(d => {
-        d.regDate = datetime(d.regDate).format('YYYY-MM-DD HH:mm:ss')
+        d.regDate = datetimeUtil(d.regDate).format('YYYY-MM-DD HH:mm:ss')
         d.score = codeStore.data
           .filter(v => v.prefix === 'B01' && (v.val === d.score))
           .map(v => v.nm)
@@ -51,7 +51,7 @@ export default function Satisfaction() {
         <UI.DatePicker
           onChange={(regDate: string) => listSatisfaction({
             isToday: 'N',
-            regDate: datetime(regDate).format('YYYY-MM-DD')
+            regDate: datetimeUtil(regDate).format('YYYY-MM-DD')
           })}
         />
 

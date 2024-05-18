@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { GridColDef, GridRowSelectionModel } from '@mui/x-data-grid'
 import { UI } from '@/components/UI'
-import { BLOG_URL, datetime, deepCopy, isNotBlank, messageUtil } from '@/utils'
+import { BLOG_URL, datetimeUtil, deepCopy, isNotBlank, messageUtil } from '@/utils'
 import { http } from '@/api'
 import { ListPostReplyDto } from '@/models'
 import useBreadcrumbStore from '@/store/breadcrumb'
@@ -31,10 +31,10 @@ export default function PostReply() {
     .then(resp => {
       setRows(deepCopy(resp.data).map(d => {
         d.link = `/post/${d.parentId}`
-        d.regDate = datetime(d.regDate).format('YYYY-MM-DD HH:mm:ss')
+        d.regDate = datetimeUtil(d.regDate).format('YYYY-MM-DD HH:mm:ss')
 
         if (isNotBlank(d.modDate)) {
-          d.modDate = datetime(d.modDate).format('YYYY-MM-DD HH:mm:ss')
+          d.modDate = datetimeUtil(d.modDate).format('YYYY-MM-DD HH:mm:ss')
         }
         return d
       }))

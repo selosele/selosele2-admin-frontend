@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { GridColDef, GridRowSelectionModel } from '@mui/x-data-grid'
 import { http } from '@/api'
 import { UI } from '@/components/UI'
-import { BLOG_URL, datetime, deepCopy, isNotEmpty, messageUtil } from '@/utils'
+import { BLOG_URL, datetimeUtil, deepCopy, isNotEmpty, messageUtil } from '@/utils'
 import useBreadcrumbStore from '@/store/breadcrumb'
 
 /** 콘텐츠 관리 페이지 컴포넌트 */
@@ -22,10 +22,10 @@ export default function Content() {
     http.get('/content')
     .then(resp => {
       setRows(deepCopy(resp.data[0]).map(d => {
-        d.regDate = datetime(d.regDate).format('YYYY-MM-DD HH:mm:ss')
+        d.regDate = datetimeUtil(d.regDate).format('YYYY-MM-DD HH:mm:ss')
 
         if (isNotEmpty(d.modDate)) {
-          d.modDate = datetime(d.modDate).format('YYYY-MM-DD HH:mm:ss')
+          d.modDate = datetimeUtil(d.modDate).format('YYYY-MM-DD HH:mm:ss')
         }
         return d
       }))

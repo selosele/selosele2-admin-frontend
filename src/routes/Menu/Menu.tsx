@@ -5,7 +5,7 @@ import { http } from '@/api'
 import { Menu as MenuData, TreeNode, Value } from '@/models'
 import useBreadcrumbStore from '@/store/breadcrumb'
 import MenuDetail from './MenuDetail'
-import { datetime, deepCopy } from '@/utils'
+import { datetimeUtil, deepCopy } from '@/utils'
 
 /** 메뉴 관리 페이지 컴포넌트 */
 export default function Menu() {
@@ -106,7 +106,7 @@ export default function Menu() {
     return http.get(`/menu/${node.id}`)
     .then(resp => {
       const detail: MenuData = deepCopy(resp.data)
-      detail.regDate = datetime(detail.regDate).format('YYYY-MM-DD HH:mm:ss')
+      detail.regDate = datetimeUtil(detail.regDate).format('YYYY-MM-DD HH:mm:ss')
       setMenuDetail({ ...detail })
 
       setParentMenuList(

@@ -4,4 +4,4 @@ import 'dayjs/locale/ko'
 dayjs.locale('ko')
 
 /** datetime 유틸 */
-export const datetime = dayjs
+export const datetimeUtil = dayjs

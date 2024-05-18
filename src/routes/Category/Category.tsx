@@ -4,7 +4,7 @@ import { TabContext, TabList, TabPanel } from '@mui/lab'
 import { UI } from '@/components/UI'
 import { http } from '@/api'
 import { Category as CategoryData, TreeNode } from '@/models'
-import { BLOG_URL, datetime, deepCopy, isEmpty } from '@/utils'
+import { BLOG_URL, datetimeUtil, deepCopy, isEmpty } from '@/utils'
 import useBreadcrumbStore from '@/store/breadcrumb'
 import CategoryDetail from './CategoryDetail'
 
@@ -137,7 +137,7 @@ export default function Category() {
     return http.get(`/${type}/${node.id}`)
     .then(resp => {
       const detail: CategoryData = deepCopy(resp.data)
-      detail.regDate = datetime(detail.regDate).format('YYYY-MM-DD HH:mm:ss')
+      detail.regDate = datetimeUtil(detail.regDate).format('YYYY-MM-DD HH:mm:ss')
       setCategoryDetail({ ...detail })
     })
   }
