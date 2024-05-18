@@ -5,6 +5,9 @@ import { TreeNode } from '@/models'
 /** tree 컴포넌트의 props 인터페이스 */
 interface Props {
 
+  /** node키 구분 값 */
+  keyType?: string
+
   /** tree max width */
   maxWidth?: number
 
@@ -23,14 +26,14 @@ export default function Tree(props: Props) {
       <SimpleTreeView>
         {props.value?.map((node,index) => (
           <TreeItem
-            key={`parent-${index}`}
+            key={`${props.keyType}-parent-${index}`}
             itemId={`${node.id}`} // itemId가 문자열이 아닐시 오류 발생
             label={node.label}
             onClick={() => props.onNodeClick(node)}
           >
             {node?.nodes.map((node,index) => (
               <TreeItem
-                key={`child-${index}`}
+                key={`${props.keyType}-child-${index}`}
                 itemId={`${node.id}`} // itemId가 문자열이 아닐시 오류 발생
                 label={node.label}
                 onClick={() => props.onNodeClick(node)}

@@ -189,6 +189,7 @@ export default function Category() {
           <UI.Splitter>
             <UI.SplitterPane>
               <UI.Tree
+                keyType={'category'}
                 value={categoryTree}
                 onNodeClick={onNodeClick}
               />
@@ -212,6 +213,7 @@ export default function Category() {
           <UI.Splitter>
             <UI.SplitterPane>
               <UI.Tree
+                keyType={'tag'}
                 value={tagTree}
                 onNodeClick={onNodeClick}
               />
