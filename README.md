@@ -1,13 +1,13 @@
 # selosele2-admin-frontend
 
-<!-- ## 접속 URL
+## 접속 URL
 
 - https://admin.blog.selosele.com
-- https://admin-blog-selosele.vercel.app (위 URL로 접속 안될 시) -->
+- https://admin-blog-selosele.vercel.app (위 URL로 접속 안될 시)
 
 ## 작업기간
 
-- 2024.04.10. ~ 
+- 2024.04.10. ~ 2024.05.18.
 
 ## 기술스택 및 개발환경 (프론트엔드)
 
