@@ -24,16 +24,16 @@ export default function Tree(props: Props) {
   return (
     <Box sx={{ maxWidth: props.maxWidth || 540 }}>
       <SimpleTreeView>
-        {props.value?.map((node,index) => (
+        {props.value?.map(node => (
           <TreeItem
-            key={`${props.keyType}-parent-${node.id}-${index}`}
+            //key={`${props.keyType}-parent-${node.id}-${index}`}
             itemId={`${node.id}`} // itemId가 문자열이 아닐시 오류 발생
             label={node.label}
             onClick={() => props.onNodeClick(node)}
           >
-            {node?.nodes.map((node,index) => (
+            {node?.nodes.map(node => (
               <TreeItem
-                key={`${props.keyType}-child-${node.id}-${index}`}
+                //key={`${props.keyType}-child-${node.id}-${index}`}
                 itemId={`${node.id}`} // itemId가 문자열이 아닐시 오류 발생
                 label={node.label}
                 onClick={() => props.onNodeClick(node)}
