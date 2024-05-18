@@ -25,7 +25,7 @@ export default function Login() {
       userPw: Yup.string()
         .required('필수 입력 항목입니다')
         .min(8, '최소 8글자 이상이어야 합니다')
-        .max(10, '최대 10글자 이하여야 합니다')
+        .max(15, '최대 15글자 이하여야 합니다')
     }),
     onSubmit: async (values, { setSubmitting }) => {
       setSubmitting(true)
