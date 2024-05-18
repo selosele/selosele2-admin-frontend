@@ -17,6 +17,8 @@ export default function Menu() {
   const [menuDetail, setMenuDetail] = useState(null as MenuData)
 
   const listMenuTree = async (): Promise<void> => {
+    setMenuTree([])
+    
     return menuStore.listData()
     .then(data => {
       createTree(data)
@@ -93,7 +95,6 @@ export default function Menu() {
   /** 트리 갱신 */
   const refreshTree = async (): Promise<void> => {
     resetMenu()
-    setMenuTree([])
     await listMenuTree()
   }
 
