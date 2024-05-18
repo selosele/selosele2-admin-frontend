@@ -11,7 +11,7 @@ export default function Search() {
   const breadcrumbStore = useBreadcrumbStore()
   const codeStore = useCodeStore()
   const [rows, setRows] = useState([])
-  const [autoSaveDate, setAutoSaveDate] = useState(null)
+  const [autoSaveDate, setAutoSaveDate] = useState([])
   const columns: GridColDef<(typeof rows)[number]>[] = [
     { field: 'rownum' },
     { headerName: '유형', field: 'typeCdNm', flex: 1 }, // width값 설정 시 minWidth 속성을 사용해야 함
@@ -71,7 +71,10 @@ export default function Search() {
   useEffect(() => {
     const autoY = rows.filter(d => d.autoYn === 'Y')
     if (autoY.length > 0) {
-      setAutoSaveDate(autoY[0].endDate)
+      setAutoSaveDate([
+        autoY[0].startDate,
+        autoY[0].endDate
+      ])
     }
   }, [rows])
 
@@ -79,7 +82,7 @@ export default function Search() {
     <UI.DataGridContainer>
       <UI.DataGridButtonBox>
         <p>
-          최근 자동 색인 실행 일시: {autoSaveDate}
+          최근 자동색인 실행일시: {autoSaveDate[0]}(시작) - {autoSaveDate[1]}(종료)
         </p>
 
         <UI.DataGridButton
