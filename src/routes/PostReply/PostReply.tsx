@@ -116,7 +116,7 @@ export default function PostReply() {
           setRowSelection(newRowSelection)
         }}
         onCellDoubleClick={(param,_) => {
-          window.open(`${BLOG_URL}/content/${param.row.parentId}`)
+          window.open(`${BLOG_URL}/post/${param.row.parentId}`)
         }}
       />
     </UI.DataGridContainer>
