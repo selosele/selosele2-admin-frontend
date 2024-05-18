@@ -121,7 +121,6 @@ export default function MenuDetail(props: Props) {
     return http.post('/menu', values)
     .then(resp => {
       messageUtil.toastSuccess('저장되었습니다.')
-
       saveMenuForm.setFieldValue('menuId', resp.data.id)
       props.refreshTree()
     })
@@ -132,7 +131,6 @@ export default function MenuDetail(props: Props) {
     return http.put('/menu', values)
     .then(resp => {
       messageUtil.toastSuccess('저장되었습니다.')
-
       saveMenuForm.setFieldValue('menuId', resp.data.id)
       props.refreshTree()
     })

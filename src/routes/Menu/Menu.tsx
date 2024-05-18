@@ -98,7 +98,6 @@ export default function Menu() {
   const refreshTree = async (): Promise<void> => {
     resetMenu()
     setMenuTree([])
-
     await listMenuTree()
   }
 

@@ -8,6 +8,7 @@ import './App.css'
 
 export default function App() {
   const codeStore = useCodeStore()
+  
   useEffect(() => {
 
     /** 공통코드 목록을 조회해서 store에 저장 */
