@@ -111,7 +111,7 @@ export default function MenuDetail(props: Props) {
   /** 메뉴 목록 조회 */
   const listMenu = async (): Promise<void> => {
     return menuStore.listData({ useYn: 'Y' })
-    .then(resp => {
+    .then(_ => {
       props.refreshTree()
     })
   }

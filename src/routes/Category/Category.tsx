@@ -19,7 +19,7 @@ export default function Category() {
   const [type, setType] = useState('')
 
   /** 탭 클릭 이벤트 핸들러 */
-  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+  const handleChange = (_: React.SyntheticEvent, newValue: string) => {
     setTabIndex(newValue)
     setCategoryDetail(null)
 
