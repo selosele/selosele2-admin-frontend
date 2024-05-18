@@ -12,12 +12,12 @@ export default function Menu() {
   const breadcrumbStore = useBreadcrumbStore()
   const [isSplitterActive, setIsSplitterActive] = useState(true)
   const [menuTree, setMenuTree] = useState([] as TreeNode[])
-  const [menuDetail, setMenuDetail] = useState(null as MenuData)
   const [menuList, setMenuList] = useState([] as MenuData[])
+  const [menuDetail, setMenuDetail] = useState(null as MenuData)
   const [parentMenuList, setParentMenuList] = useState([] as Value[])
 
-  const listMenuTree = async () => {
-    http.get('/menu/list/tree')
+  const listMenuTree = async (): Promise<void> => {
+    return http.get('/menu/list/tree')
     .then(resp => {
       createTree(resp.data)
       setMenuList(resp.data)

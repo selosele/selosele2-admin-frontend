@@ -35,11 +35,11 @@ export default function SelectBox(props: Props) {
   let options: Value[] = []
 
   if (props?.defaultValue) {
-    options.push(props.defaultValue)
+    options = [props.defaultValue]
   }
 
   if (props.options?.length) {
-    props.options.forEach(d => options.push(d))
+    options = [...options, ...props.options]
   }
 
   return (

@@ -10,4 +10,5 @@
 
 .pane ~ .pane .splitter__wrapper {
   padding: 1rem;
+  border: 10px solid #f2f2f2;
 }
