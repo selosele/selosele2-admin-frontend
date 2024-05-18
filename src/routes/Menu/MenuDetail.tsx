@@ -47,7 +47,7 @@ export default function MenuDetail(props: Props) {
       /** 메뉴 정렬 순서 */
       sort: props.data?.sort || 1,
       /** 메뉴 권한 */
-      role: '',
+      role: role,
       /** 메뉴 외부 링크 여부 */
       externalYn: props.data?.externalYn || 'N',
       /** 메뉴 사용 여부 */
@@ -73,7 +73,14 @@ export default function MenuDetail(props: Props) {
       const confirm = await messageUtil.confirmSuccess('저장하시겠습니까?')
       if (!confirm) return
 
-      console.log(values)
+      // 메뉴 ID 값이 없으면 등록 API를 타고
+      if (isEmpty(values.id)) {
+        await addMenu(values)
+      } else {
+        // 있으면 수정 API를 탄다.
+        await updateMenu(values)
+      }
+      await listMenu()
     }
   })
 
@@ -82,11 +89,11 @@ export default function MenuDetail(props: Props) {
       await listRole()
     }
     fetchData()
-  }, [role])
+  }, [])
 
   useEffect(() => {
     setRole(getMenuRoleModel())
-  }, [role, roleList])
+  }, [roleList])
 
   /** 메뉴 목록 조회 */
   const listMenu = async (): Promise<void> => {
@@ -109,6 +116,28 @@ export default function MenuDetail(props: Props) {
     })
   }
 
+  /** 메뉴 등록 */
+  const addMenu = async (values): Promise<void> => {
+    return http.post('/menu', values)
+    .then(resp => {
+      messageUtil.toastSuccess('저장되었습니다.')
+
+      saveMenuForm.setFieldValue('menuId', resp.data.id)
+      props.refreshTree()
+    })
+  }
+
+  /** 메뉴 수정 */
+  const updateMenu = async (values): Promise<void> => {
+    return http.put('/menu', values)
+    .then(resp => {
+      messageUtil.toastSuccess('저장되었습니다.')
+
+      saveMenuForm.setFieldValue('menuId', resp.data.id)
+      props.refreshTree()
+    })
+  }
+
   /** 메뉴 삭제 */
   const onRemove = async (values): Promise<void> => {
     if (isEmpty(values.id)) return
@@ -119,9 +148,7 @@ export default function MenuDetail(props: Props) {
     http.delete(`/menu/${values.id}`)
     .then(async () => {
       messageUtil.toastSuccess('삭제되었습니다.')
-
       await listMenu()
-      props.refreshTree()
     })
   }
 
@@ -134,6 +161,16 @@ export default function MenuDetail(props: Props) {
       return list.length > 1 ? '' : list[0]?.roleId
     }
     return ''
+  }
+
+  /** 상위메뉴선택 셀렉트박스 선택 시 실행 */
+  const handleParentIdChange = (event: React.ChangeEvent<{ value: unknown }>): void => {
+    updateDepth(event.target.value as string)
+  }
+
+  /** 권한선택 셀렉트박스 선택 시 실행 */
+  const handleRoleChange = (event: React.ChangeEvent<{ value: unknown }>): void => {
+    setRole(event.target.value as string)
   }
 
   /** 메뉴 계층 갱신 */
@@ -163,7 +200,7 @@ export default function MenuDetail(props: Props) {
           defaultValue={{ value: '', text: '상위 메뉴 선택' }}
           value={saveMenuForm.values.parentId}
           options={props.parentMenuList}
-          onChange={(e) => updateDepth(e.target.value as string)}
+          onChange={handleParentIdChange}
         />
 
         <TextField
@@ -218,6 +255,7 @@ export default function MenuDetail(props: Props) {
           defaultValue={{ value: '', text: '모든 권한 허용' }}
           value={role}
           options={roleList}
+          onChange={handleRoleChange}
         />
 
         <UI.RadioGroup
