@@ -1,3 +1,6 @@
+import { Value } from './input'
+import { ListMenuDto } from '../dto/list-menu'
+
 /** 메뉴 인터페이스 */
 export interface Menu {
 
@@ -23,7 +26,7 @@ export interface Menu {
   externalYn?: string
 
   /** 메뉴 사용 여부 */
-  useYn?: string
+  useYn?: 'Y' | 'N'
 
   /** 메뉴 등록일시 */
   regDate?: string
@@ -53,5 +56,25 @@ export class MenuRole {
 
   /** 메뉴 */
   menu?: Menu
+  
+}
+
+/** 메뉴 상태 인터페이스 */
+export interface MenuState {
+
+  /** 메뉴 목록 */
+  data: Menu[]
+
+  /** 상위 메뉴 목록 */
+  parentData: Value[]
+
+  /** 메뉴 목록 조회 */
+  listData: (listMenuDto?: ListMenuDto) => Promise<Menu[]>
+
+  /** 상위 메뉴 목록 조회 */
+  listParentData: (data: Menu[]) => Value[]
+
+  /** 상위 메뉴 목록 설정 */
+  setParentData: (data: Value[]) => void
   
 }

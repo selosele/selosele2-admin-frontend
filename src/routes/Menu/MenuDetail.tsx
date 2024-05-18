@@ -6,15 +6,13 @@ import { Menu, Value } from '@/models'
 import { UI } from '@/components/UI'
 import { isEmpty, messageUtil } from '@/utils'
 import { http } from '@/api'
+import useMenuStore from '@/store/menu'
 
 /** 메뉴 상세 조회 props 인터페이스 */
 interface Props {
 
   /** 메뉴 상세 데이터 */
   data?: Menu
-
-  /** 상위 메뉴 목록 */
-  parentMenuList?: Value[]
 
   /** splitter 닫기 */
   close?: Function
@@ -26,6 +24,7 @@ interface Props {
 
 /** 메뉴 상세 조회 컴포넌트 */
 export default function MenuDetail(props: Props) {
+  const menuStore = useMenuStore()
   const [role, setRole] = useState('')
   const [roleList, setRoleList] = useState([] as Value[])
 
@@ -92,12 +91,26 @@ export default function MenuDetail(props: Props) {
   }, [])
 
   useEffect(() => {
+    if (menuStore.data.length > 0) {
+      setParentData()
+    }
+  }, [menuStore.data])
+
+  useEffect(() => {
     setRole(getMenuRoleModel())
   }, [roleList])
 
+  /** 상위 메뉴 데이터 설정 */
+  const setParentData = (): void => {
+    menuStore.setParentData(
+      menuStore.listParentData(menuStore.data)
+        .filter(d => d.value !== props.data?.id)
+    )
+  }
+
   /** 메뉴 목록 조회 */
   const listMenu = async (): Promise<void> => {
-    return http.get('/menu/list/tree', { params: { useYn: 'Y' } })
+    return menuStore.listData({ useYn: 'Y' })
     .then(resp => {
       props.refreshTree()
     })
@@ -164,6 +177,7 @@ export default function MenuDetail(props: Props) {
   /** 상위메뉴선택 셀렉트박스 선택 시 실행 */
   const handleParentIdChange = (event: React.ChangeEvent<{ value: unknown }>): void => {
     updateDepth(event.target.value as string)
+    saveMenuForm.handleChange(event)
   }
 
   /** 권한선택 셀렉트박스 선택 시 실행 */
@@ -197,7 +211,7 @@ export default function MenuDetail(props: Props) {
           name='parentId'
           defaultValue={{ value: '', text: '상위 메뉴 선택' }}
           value={saveMenuForm.values.parentId}
-          options={props.parentMenuList}
+          options={menuStore.parentData}
           onChange={handleParentIdChange}
         />
 

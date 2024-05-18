@@ -2,26 +2,25 @@ import { useEffect, useState } from 'react'
 import { Box, Button } from '@mui/material'
 import { UI } from '@/components/UI'
 import { http } from '@/api'
-import { Menu as MenuData, TreeNode, Value } from '@/models'
-import useBreadcrumbStore from '@/store/breadcrumb'
-import MenuDetail from './MenuDetail'
+import { Menu as MenuData, TreeNode } from '@/models'
 import { datetimeUtil, deepCopy } from '@/utils'
+import useBreadcrumbStore from '@/store/breadcrumb'
+import useMenuStore from '@/store/menu'
+import MenuDetail from './MenuDetail'
 
 /** 메뉴 관리 페이지 컴포넌트 */
 export default function Menu() {
   const breadcrumbStore = useBreadcrumbStore()
+  const menuStore = useMenuStore()
   const [isSplitterActive, setIsSplitterActive] = useState(true)
   const [menuTree, setMenuTree] = useState([] as TreeNode[])
-  const [menuList, setMenuList] = useState([] as MenuData[])
   const [menuDetail, setMenuDetail] = useState(null as MenuData)
-  const [parentMenuList, setParentMenuList] = useState([] as Value[])
 
   const listMenuTree = async (): Promise<void> => {
-    return http.get('/menu/list/tree')
-    .then(resp => {
-      createTree(resp.data)
-      setMenuList(resp.data)
-      setParentMenuList(listParentMenu(menuList))
+    return menuStore.listData()
+    .then(data => {
+      createTree(data)
+      menuStore.setParentData(menuStore.listParentData(data))
     })
   }
 
@@ -36,12 +35,9 @@ export default function Menu() {
     fetchData()
   }, [])
 
-  let menuArr = []
-  
   /** 트리 배열에 node 넣기 */
   const pushNode = (node: TreeNode): void => {
-    menuArr.push(node)
-    setMenuTree(menuArr)
+    setMenuTree(value => [...value, node])
   }
 
   /** 트리 생성 */
@@ -90,7 +86,7 @@ export default function Menu() {
   const resetMenu = (): void => {
     if (menuDetail !== null) {
       setMenuDetail(null)
-      setParentMenuList([])
+      menuStore.setParentData([])
     }
   }
 
@@ -107,21 +103,9 @@ export default function Menu() {
     .then(resp => {
       const detail: MenuData = deepCopy(resp.data)
       detail.regDate = datetimeUtil(detail.regDate).format('YYYY-MM-DD HH:mm:ss')
+
       setMenuDetail({ ...detail })
-
-      setParentMenuList(
-        listParentMenu(menuList)
-          .filter(d => d.value !== detail?.id)
-      )
     })
-  }
-
-  /** 상위 메뉴 목록 조회 */
-  const listParentMenu = (nodes): Value[] => {
-    return nodes.map(d => ({
-      value: d.id,
-      text: d.name
-    }))
   }
 
   return (
@@ -144,7 +128,6 @@ export default function Menu() {
           <UI.SplitterPane>
             <MenuDetail
               data={menuDetail}
-              parentMenuList={parentMenuList}
               close={setIsSplitterActive}
               refreshTree={refreshTree}
               key={menuDetail?.id}

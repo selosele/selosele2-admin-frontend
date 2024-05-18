@@ -1,4 +1,5 @@
 // DTO
+export * from './dto/list-menu'
 export * from './dto/post-reply'
 export * from './dto/satisfatcion'
 
