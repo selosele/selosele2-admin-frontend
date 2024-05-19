@@ -13,8 +13,8 @@ export default function Menu() {
   const breadcrumbStore = useBreadcrumbStore()
   const menuStore = useMenuStore()
   const [isSplitterActive, setIsSplitterActive] = useState(true)
-  const [menuTree, setMenuTree] = useState([] as TreeNode[])
-  const [menuDetail, setMenuDetail] = useState(null as MenuData)
+  const [menuTree, setMenuTree] = useState<TreeNode[]>([])
+  const [menuDetail, setMenuDetail] = useState<MenuData>(null)
 
   const listMenuTree = async (): Promise<void> => {
     resetMenu()

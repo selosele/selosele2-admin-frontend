@@ -26,7 +26,7 @@ interface Props {
 export default function MenuDetail(props: Props) {
   const menuStore = useMenuStore()
   const [role, setRole] = useState('')
-  const [roleList, setRoleList] = useState([] as Value[])
+  const [roleList, setRoleList] = useState<Value[]>([])
 
   /** 메뉴 저장 폼 */
   const saveMenuForm = useFormik({

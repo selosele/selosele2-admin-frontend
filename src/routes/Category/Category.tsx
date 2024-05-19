@@ -13,9 +13,9 @@ export default function Category() {
   const breadcrumbStore = useBreadcrumbStore()
   const [tabIndex, setTabIndex] = useState('0')
   const [isSplitterActive, setIsSplitterActive] = useState(true)
-  const [categoryDetail, setCategoryDetail] = useState(null as CategoryData)
-  const [categoryTree, setCategoryTree] = useState([] as TreeNode[])
-  const [tagTree, setTagTree] = useState([] as TreeNode[])
+  const [categoryDetail, setCategoryDetail] = useState<CategoryData>(null)
+  const [categoryTree, setCategoryTree] = useState<TreeNode[]>([])
+  const [tagTree, setTagTree] = useState<TreeNode[]>([])
   const [type, setType] = useState('')
 
   /** 탭 클릭 이벤트 핸들러 */
