@@ -47,6 +47,8 @@ export default function MenuDetail(props: Props) {
       sort: props.data?.sort || 1,
       /** 메뉴 권한 */
       role: role,
+      /** 메뉴 외부 링크 여부 */
+      externalYn: props.data?.externalYn || 'N',
       /** 메뉴 사용 여부 */
       useYn: props.data?.useYn || 'Y',
     },
@@ -58,6 +60,8 @@ export default function MenuDetail(props: Props) {
         .required('필수 입력 항목입니다')
         .max(255, '최대 255글자 이하여야 합니다'),
       sort: Yup.number()
+        .required('필수 입력 항목입니다'),
+      externalYn: Yup.string()
         .required('필수 입력 항목입니다'),
       useYn: Yup.string()
         .required('필수 입력 항목입니다')
@@ -264,6 +268,19 @@ export default function MenuDetail(props: Props) {
           value={role}
           options={roleList}
           onChange={handleRoleChange}
+        />
+
+        <UI.RadioGroup
+          row
+          label='메뉴 외부 링크 여부'
+          labelid='menuExternalYn'
+          name='externalYn'
+          value={saveMenuForm.values.externalYn}
+          onChange={saveMenuForm.handleChange}
+          list={[
+            { value: 'Y', text: '예' },
+            { value: 'N', text: '아니오' }
+          ]}
         />
 
         <UI.RadioGroup
