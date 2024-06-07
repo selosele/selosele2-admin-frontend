@@ -1,6 +1,6 @@
 import axios from 'axios'
 import useAuthStore from '@/store/auth'
-import { isNotBlank, isNotEmpty, messageUtil } from '@/utils'
+import { isNotBlank, messageUtil } from '@/utils'
 import globalRouter from '@/routes'
 
 /** axios 인스턴스 */
@@ -32,7 +32,7 @@ http.interceptors.response.use(
   async error => {
     const originalRequest = error.config
 
-    if (isNotEmpty(error?.response?.data?.type) && error?.response?.data?.type === 'biz') {
+    if (isNotBlank(error?.response?.data?.type) && error?.response?.data?.type === 'biz') {
       // 비즈니스 로직 예외 처리
       messageUtil.toastError(error.response.data?.message)
     } else {
