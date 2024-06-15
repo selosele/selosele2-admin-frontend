@@ -11,8 +11,8 @@
 .login__form {
   max-width: 23.33333rem;
   padding: 1.5rem;
+  border: 1px solid #dcdcdc;
   background-color: #fff;
-  box-shadow: rgba(0,0,0,0.2) 1px 1px 0.75rem 0;
 }
 
 .login__title {
