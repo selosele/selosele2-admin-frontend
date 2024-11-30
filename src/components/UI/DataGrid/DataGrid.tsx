@@ -1,7 +1,7 @@
 import { DataGrid as DataGridComponent, DataGridProps, GridColDef } from '@mui/x-data-grid'
 
 /** 데이터그리드 컴포넌트 */
-export default function DataGrid({ columns, rows, ...otherProps }: DataGridProps) {
+export default function DataGrid({ columns, rows, loading = false, ...otherProps }: DataGridProps) {
   
   // 컬럼 수정
   const modifiedColumns: GridColDef[] = columns.map(column => {
@@ -21,6 +21,8 @@ export default function DataGrid({ columns, rows, ...otherProps }: DataGridProps
     <DataGridComponent
       columns={modifiedColumns}
       rows={modifiedRows}
+      loading={loading}
+      localeText={{ noRowsLabel: '데이터가 없습니다.' }}
       {...otherProps}
     />
   )

@@ -9,6 +9,7 @@ import useBreadcrumbStore from '@/store/breadcrumb'
 /** 포스트 댓글 관리 페이지 컴포넌트 */
 export default function PostReply() {
   const breadcrumbStore = useBreadcrumbStore()
+  const [loading, setLoading] = useState(true)
   const [option, setOption] = useState('')
   const [rows, setRows] = useState([])
   const [rowSelection, setRowSelection] = useState<GridRowSelectionModel>([])
@@ -29,6 +30,7 @@ export default function PostReply() {
 
     http.get('/postreply', { params: listPostReplyDto })
     .then(resp => {
+      setLoading(false)
       setRows(deepCopy(resp.data).map(d => {
         d.link = `/post/${d.parentId}`
         d.regDate = datetimeUtil(d.regDate).format('YYYY-MM-DD HH:mm:ss')
@@ -101,6 +103,7 @@ export default function PostReply() {
       <UI.DataGrid
         rows={rows}
         columns={columns}
+        loading={loading}
         initialState={{
           pagination: {
             paginationModel: {

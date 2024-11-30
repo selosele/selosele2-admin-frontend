@@ -11,6 +11,7 @@ export default function Code() {
   const breadcrumbStore = useBreadcrumbStore()
   const [isSplitterActive, setIsSplitterActive] = useState(false)
   const [codeDetail, setCodeDetail] = useState(null)
+  const [loading, setLoading] = useState(true)
   const [rows, setRows] = useState([])
   const columns: GridColDef<(typeof rows)[number]>[] = [
     { field: 'rownum' },
@@ -34,6 +35,7 @@ export default function Code() {
   const listCode = (): void => {
     http.get('/code')
     .then(resp => {
+      setLoading(false)
       setRows(deepCopy(resp.data).map(d => {
         d.useYn = getUseYn(d.useYn)
         return d
@@ -72,6 +74,7 @@ export default function Code() {
           <UI.DataGrid
             rows={rows}
             columns={columns}
+            loading={loading}
             initialState={{
               pagination: {
                 paginationModel: {

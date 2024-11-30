@@ -8,6 +8,7 @@ import useBreadcrumbStore from '@/store/breadcrumb'
 /** 콘텐츠 관리 페이지 컴포넌트 */
 export default function Content() {
   const breadcrumbStore = useBreadcrumbStore()
+  const [loading, setLoading] = useState(true)
   const [rowSelection, setRowSelection] = useState<GridRowSelectionModel>([])
   const [rows, setRows] = useState([])
   const columns: GridColDef<(typeof rows)[number]>[] = [
@@ -21,6 +22,7 @@ export default function Content() {
   const listContent = (): void => {
     http.get('/content')
     .then(resp => {
+      setLoading(false)
       setRows(deepCopy(resp.data[0]).map(d => {
         d.regDate = datetimeUtil(d.regDate).format('YYYY-MM-DD HH:mm:ss')
 
@@ -84,6 +86,7 @@ export default function Content() {
       <UI.DataGrid
         rows={rows}
         columns={columns}
+        loading={loading}
         initialState={{
           pagination: {
             paginationModel: {

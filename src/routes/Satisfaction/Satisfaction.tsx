@@ -11,6 +11,7 @@ import useBreadcrumbStore from '@/store/breadcrumb'
 export default function Satisfaction() {
   const breadcrumbStore = useBreadcrumbStore()
   const codeStore = useCodeStore()
+  const [loading, setLoading] = useState(true)
   const [rows, setRows] = useState([])
   const columns: GridColDef<(typeof rows)[number]>[] = [
     { field: 'rownum' },
@@ -24,6 +25,7 @@ export default function Satisfaction() {
   const listSatisfaction = (searchSatisfactionDto: SearchSatisfactionDto): void => {
     http.get('/satisfaction', { params: searchSatisfactionDto })
     .then(resp => {
+      setLoading(false)
       setRows(deepCopy(resp.data).map(d => {
         d.regDate = datetimeUtil(d.regDate).format('YYYY-MM-DD HH:mm:ss')
         d.score = codeStore.data
@@ -74,6 +76,7 @@ export default function Satisfaction() {
       <UI.DataGrid
         rows={rows}
         columns={columns}
+        loading={loading}
         initialState={{
           pagination: {
             paginationModel: {
