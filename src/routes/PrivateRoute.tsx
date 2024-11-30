@@ -15,6 +15,6 @@ export default function PrivateRoute() {
       </Layout.Container>
     )
   }
-  // 미로그인 유저가 이동할 곳
+  // 비로그인 유저가 이동할 곳
   return <Navigate replace to='/login' />
 }
