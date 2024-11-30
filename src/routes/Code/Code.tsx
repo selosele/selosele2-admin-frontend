@@ -33,6 +33,8 @@ export default function Code() {
 
   /** 공통코드 목록 조회 */
   const listCode = (): void => {
+    setLoading(true) // 새로고침 버튼 클릭 시, 로딩상태 초기화
+    
     http.get('/code')
     .then(resp => {
       setLoading(false)

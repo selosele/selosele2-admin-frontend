@@ -20,6 +20,8 @@ export default function Content() {
 
   /** 콘텐츠 목록 조회 */
   const listContent = (): void => {
+    setLoading(true) // 새로고침 버튼 클릭 시, 로딩상태 초기화
+    
     http.get('/content')
     .then(resp => {
       setLoading(false)

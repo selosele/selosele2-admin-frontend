@@ -23,6 +23,8 @@ export default function Satisfaction() {
 
   /** 만족도조사 목록 조회 */
   const listSatisfaction = (searchSatisfactionDto: SearchSatisfactionDto): void => {
+    setLoading(true) // 새로고침 버튼 클릭 시, 로딩상태 초기화
+    
     http.get('/satisfaction', { params: searchSatisfactionDto })
     .then(resp => {
       setLoading(false)

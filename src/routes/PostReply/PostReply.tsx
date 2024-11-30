@@ -28,6 +28,8 @@ export default function PostReply() {
       listPostReplyDto[option] = 'Y'
     }
 
+    setLoading(true) // 새로고침 버튼 클릭 시, 로딩상태 초기화
+
     http.get('/postreply', { params: listPostReplyDto })
     .then(resp => {
       setLoading(false)
