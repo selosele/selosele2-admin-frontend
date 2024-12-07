@@ -15,6 +15,8 @@ export default function Menu() {
   const [isSplitterActive, setIsSplitterActive] = useState(true)
   const [menuTree, setMenuTree] = useState<TreeNode[]>([])
   const [menuDetail, setMenuDetail] = useState<MenuData>(null)
+  const [treeLoading, setTreeLoading] = useState(true)
+  const [detailLoading, setDetailLoading] = useState(false)
 
   const listMenuTree = async (): Promise<void> => {
     resetMenu()
@@ -22,6 +24,7 @@ export default function Menu() {
 
     return menuStore.listData()
     .then(data => {
+      setTreeLoading(false)
       createTree(data)
       menuStore.setParentData(menuStore.listParentData(data))
     })
@@ -75,6 +78,7 @@ export default function Menu() {
 
     // 똑같은 node를 여러 번 클릭해서 API가 호출되는 것을 막기 위해, node.id와 menu.id가 다를 때만 API를 호출한다.
     if (node.id !== menuDetail?.id) {
+      setDetailLoading(true)
       await getMenu(node)
     }
   }
@@ -95,6 +99,7 @@ export default function Menu() {
 
   /** 트리 갱신 */
   const refreshTree = async (): Promise<void> => {
+    setTreeLoading(true)
     await listMenuTree()
   }
 
@@ -102,9 +107,10 @@ export default function Menu() {
   const getMenu = async (node: TreeNode): Promise<void> => {
     return http.get(`/menu/${node.id}`)
     .then(resp => {
+      setDetailLoading(false)
+      
       const detail: MenuData = deepCopy(resp.data)
       detail.regDate = datetimeUtil(detail.regDate).format('YYYY-MM-DD HH:mm:ss')
-
       setMenuDetail({ ...detail })
     })
   }
@@ -119,20 +125,28 @@ export default function Menu() {
 
       <UI.Splitter>
         <UI.SplitterPane>
-          <UI.Tree
-            value={menuTree}
-            onNodeClick={onNodeClick}
-          />
+          {
+            treeLoading
+            ? <UI.Skeleton count={3} />
+            : <UI.Tree
+                value={menuTree}
+                onNodeClick={onNodeClick}
+              /> 
+          }
         </UI.SplitterPane>
 
         {isSplitterActive && (
           <UI.SplitterPane>
-            <MenuDetail
-              data={menuDetail}
-              close={setIsSplitterActive}
-              refreshTree={refreshTree}
-              key={menuDetail?.id}
-            />
+            {
+              detailLoading
+              ? <UI.Loading />
+              : <MenuDetail
+                  data={menuDetail}
+                  close={setIsSplitterActive}
+                  refreshTree={refreshTree}
+                  key={menuDetail?.id}
+                />
+            }
           </UI.SplitterPane>
         )}
       </UI.Splitter>

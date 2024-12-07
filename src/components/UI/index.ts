@@ -9,10 +9,12 @@ import SelectBox from './Form/SelectBox/SelectBox'
 import RadioGroup from './Form/RadioGroup/RadioGroup'
 import SplitForm from './Form/SplitForm/SplitForm'
 import Tree from './Tree/Tree'
+import Skeleton from './Skeleton/Skeleton'
+import Loading from './Loading/Loading'
 
 /** UI 관련 컴포넌트 */
 export const UI = {
   DataGrid, DataGridContainer, DataGridButton,
   DataGridButtonBox, Splitter, SplitterPane, SplitForm,
-  DatePicker, SelectBox, RadioGroup, Tree
+  DatePicker, SelectBox, RadioGroup, Tree, Skeleton, Loading
 }

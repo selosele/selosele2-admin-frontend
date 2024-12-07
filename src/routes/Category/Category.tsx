@@ -17,6 +17,8 @@ export default function Category() {
   const [categoryTree, setCategoryTree] = useState<TreeNode[]>([])
   const [tagTree, setTagTree] = useState<TreeNode[]>([])
   const [type, setType] = useState('')
+  const [treeLoading, setTreeLoading] = useState(true)
+  const [detailLoading, setDetailLoading] = useState(false)
 
   /** 탭 클릭 이벤트 핸들러 */
   const handleChange = (_: React.SyntheticEvent, newValue: string) => {
@@ -31,6 +33,7 @@ export default function Category() {
   const listCategoryTreeAndPost = async (): Promise<void> => {
     http.get('/category/list/tree')
     .then(resp => {
+      setTreeLoading(false)
       createTree(resp.data, 'D01004')
     })
   }
@@ -39,6 +42,7 @@ export default function Category() {
   const listTagTreeAndPost = async (): Promise<void> => {
     http.get('/tag/list/tree')
     .then(resp => {
+      setTreeLoading(false)
       createTree(resp.data, 'D01005')
     })
   }
@@ -125,6 +129,7 @@ export default function Category() {
 
     // 똑같은 node를 여러번 클릭해서 API가 호출되는 것을 막기 위해, node.id와 category.id가 다를 때만 API를 호출한다.
     if (!isPostNode(node.nodes) && node.id !== categoryDetail?.id) {
+      setDetailLoading(true)
       await getCategory(node)
     }
   }
@@ -136,6 +141,8 @@ export default function Category() {
 
     return http.get(`/${type}/${node.id}`)
     .then(resp => {
+      setDetailLoading(false)
+
       const detail: CategoryData = deepCopy(resp.data)
       detail.regDate = datetimeUtil(detail.regDate).format('YYYY-MM-DD HH:mm:ss')
       setCategoryDetail({ ...detail })
@@ -159,6 +166,8 @@ export default function Category() {
 
   /** 트리 갱신 */
   const refreshTree = async (): Promise<void> => {
+    setTreeLoading(true)
+
     resetCategory()
     setCategoryTree([])
     setTagTree([])
@@ -188,22 +197,30 @@ export default function Category() {
         <TabPanel value='0'>
           <UI.Splitter>
             <UI.SplitterPane>
-              <UI.Tree
-                keyType={'category'}
-                value={categoryTree}
-                onNodeClick={onNodeClick}
-              />
+              {
+                treeLoading
+                ? <UI.Skeleton count={3} />
+                : <UI.Tree
+                    keyType={'category'}
+                    value={categoryTree}
+                    onNodeClick={onNodeClick}
+                  />
+              }
             </UI.SplitterPane>
 
             {isSplitterActive && (
               <UI.SplitterPane>
-                <CategoryDetail
-                  data={categoryDetail}
-                  type={'D01004'}
-                  close={setIsSplitterActive}
-                  refreshTree={refreshTree}
-                  key={`${type}${categoryDetail?.id}`}
-                />
+                {
+                  detailLoading
+                  ? <UI.Loading />
+                  : <CategoryDetail
+                      data={categoryDetail}
+                      type={'D01004'}
+                      close={setIsSplitterActive}
+                      refreshTree={refreshTree}
+                      key={`${type}${categoryDetail?.id}`}
+                    />
+                }
               </UI.SplitterPane>
             )}
           </UI.Splitter>
@@ -212,22 +229,30 @@ export default function Category() {
         <TabPanel value='1'>
           <UI.Splitter>
             <UI.SplitterPane>
-              <UI.Tree
-                keyType={'tag'}
-                value={tagTree}
-                onNodeClick={onNodeClick}
-              />
+              {
+                treeLoading
+                ? <UI.Skeleton count={3} />
+                : <UI.Tree
+                    keyType={'tag'}
+                    value={tagTree}
+                    onNodeClick={onNodeClick}
+                  />
+              }
             </UI.SplitterPane>
 
             {isSplitterActive && (
               <UI.SplitterPane>
-                <CategoryDetail
-                  data={categoryDetail}
-                  type={'D01005'}
-                  close={setIsSplitterActive}
-                  refreshTree={refreshTree}
-                  key={`${type}${categoryDetail?.id}`}
-                />
+                {
+                  detailLoading
+                  ? <UI.Loading />
+                  : <CategoryDetail
+                      data={categoryDetail}
+                      type={'D01005'}
+                      close={setIsSplitterActive}
+                      refreshTree={refreshTree}
+                      key={`${type}${categoryDetail?.id}`}
+                    />
+                }
               </UI.SplitterPane>
             )}
           </UI.Splitter>
