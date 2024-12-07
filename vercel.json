@@ -12,12 +12,12 @@
   "redirects": [
     {
       "source": "/",
-      "destination": "/system/",
+      "destination": "https://blog.selosele.com/system",
       "permanent": true
     },
     {
       "source": "/:path*",
-      "destination": "/system/:path*",
+      "destination": "https://blog.selosele.com/system/:path*",
       "permanent": true
     }
   ]
