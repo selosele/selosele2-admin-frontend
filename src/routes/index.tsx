@@ -26,30 +26,30 @@ export function GlobalRouter() {
   return (
     <Routes>
       {/* 로그인 페이지 */}
-      <Route path='/login' element={<Pages.Login />} />
+      <Route path='/system/login' element={<Pages.Login />} />
 
       {/* 로그인이 필요한 페이지들 */}
       <Route element={<PrivateRoute />}>
 
         {/* 메인 페이지 */}
-        <Route path='/' element={<Pages.Main />} />
+        <Route path='/system' element={<Pages.Main />} />
         {/* 공통코드 관리 페이지 */}
-        <Route path='/code' element={<Pages.Code />} />
+        <Route path='/system/code' element={<Pages.Code />} />
         {/* 메뉴 관리 페이지 */}
-        <Route path='/menu' element={<Pages.Menu />} />
+        <Route path='/system/menu' element={<Pages.Menu />} />
         {/* 카테고리/태그 관리 페이지 */}
-        <Route path='/category' element={<Pages.Category />} />
+        <Route path='/system/category' element={<Pages.Category />} />
         {/* 포스트 댓글 관리 페이지 */}
-        <Route path='/post-reply' element={<Pages.PostReply />} />
+        <Route path='/system/post-reply' element={<Pages.PostReply />} />
         {/* 콘텐츠 관리 페이지 */}
-        <Route path='/content' element={<Pages.Content />} />
+        <Route path='/system/content' element={<Pages.Content />} />
         {/* 만족도조사 관리 페이지 */}
-        <Route path='/satisfaction' element={<Pages.Satisfaction />} />
+        <Route path='/system/satisfaction' element={<Pages.Satisfaction />} />
         {/* 검색 관리 페이지 */}
-        <Route path='/search' element={<Pages.Search />} />
+        <Route path='/system/search' element={<Pages.Search />} />
 
         {/* 에러 페이지 */}
-        <Route path='/error' element={<Pages.NotFound />} />
+        <Route path='/system/error' element={<Pages.NotFound />} />
         <Route path='*' element={<Pages.NotFound />} />
       </Route>
     </Routes>

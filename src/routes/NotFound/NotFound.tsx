@@ -18,7 +18,7 @@ export default function NotFound() {
       <Button
         variant='outlined'
         sx={{ mt: '0.5rem' }}
-        onClick={() => navigate('/')}
+        onClick={() => navigate('/system')}
       >
         홈으로 이동
       </Button>

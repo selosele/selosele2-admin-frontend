@@ -69,7 +69,7 @@ http.interceptors.response.use(
 
     // 404 오류
     if (error?.response?.status === 404) {
-      globalRouter.navigate('/error')
+      globalRouter.navigate('/system/error')
     }
     return Promise.reject(error)
   }

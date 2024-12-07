@@ -35,7 +35,7 @@ export default function Login() {
       if (accessToken) {
         http.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`
         window.localStorage.setItem('accessToken', accessToken)
-        navigate('/')
+        navigate('/system')
       }
     }
   })
