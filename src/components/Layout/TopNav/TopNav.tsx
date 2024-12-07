@@ -102,7 +102,7 @@ export default function TopMenu(props: Props) {
             component='div'
             sx={{ flexGrow: 1 }}
           >
-            <Link to='/'>{siteTitle}</Link>
+            <Link to='/system'>{siteTitle}</Link>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
