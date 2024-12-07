@@ -8,27 +8,5 @@
       "source": "/(.*)",
       "destination": "/"
     }
-  ],
-  "redirects": [
-    {
-      "source": "https://blogadmin.selosele.com",
-      "destination": "https://blog.selosele.com/system",
-      "permanent": true
-    },
-    {
-      "source": "https://blogadmin.selosele.com/:path*",
-      "destination": "https://blog.selosele.com/system/:path*",
-      "permanent": true
-    },
-    {
-      "source": "https://blogadmin-selosele.vercel.app",
-      "destination": "https://blog.selosele.com/system",
-      "permanent": true
-    },
-    {
-      "source": "https://blogadmin-selosele.vercel.app/:path*",
-      "destination": "https://blog.selosele.com/system/:path*",
-      "permanent": true
-    }
   ]
 }
