@@ -51,7 +51,7 @@ export default function TopMenu(props: Props) {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }} className={`topnav`}>
       <Typography variant='h6' sx={{ my: 2 }}>
-        <Link to='/'>{siteTitle}</Link>
+        <Link to='/system'>{siteTitle}</Link>
       </Typography>
       <Divider />
       <List>
