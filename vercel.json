@@ -8,12 +8,5 @@
       "source": "/(.*)",
       "destination": "/system"
     }
-  ],
-  "redirects": [
-    {
-      "source": "/",
-      "destination": "https://blog.selosele.com/system",
-      "permanent": true
-    }
   ]
 }
