@@ -5,7 +5,7 @@
       "has": [
         {
           "type": "host",
-          "value": "blogadmin.selosele.com"
+          "value": "blogadmin.selosele.com/"
         }
       ],
       "destination": "https://blog.selosele.com/system",
