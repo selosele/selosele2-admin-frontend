@@ -3,13 +3,10 @@
     {
       "source": "/api/:path*",
       "destination": "https://35.212.141.160/api/:path*"
-    }
-  ],
-  "redirects": [
+    },
     {
-      "source": "/",
-      "destination": "https://blog.selosele.com/system",
-      "permanent": true
+      "source": "/(.*)",
+      "destination": "/system"
     }
   ]
 }
