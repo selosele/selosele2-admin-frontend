@@ -8,5 +8,17 @@
       "source": "/(.*)",
       "destination": "/"
     }
+  ],
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/system/",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "destination": "/system/:path*",
+      "permanent": true
+    }
   ]
 }
