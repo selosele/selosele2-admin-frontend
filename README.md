@@ -2,8 +2,9 @@
 
 ## 접속 URL
 
-- https://admin.blog.selosele.com
-- https://admin-blog-selosele.vercel.app (위 URL로 접속 안될 시)
+- https://blog.selosele.com/system
+- https://blogadmin.selosele.com (위 URL로 접속 안될 시)
+- https://blogadmin-selosele.vercel.app (위 URL로 접속 안될 시)
 
 ## 작업기간
 
