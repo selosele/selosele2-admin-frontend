@@ -2,12 +2,15 @@ import { useEffect } from 'react'
 import { ThemeProvider } from '@mui/material'
 import { theme } from './utils'
 import { GlobalRouter } from './routes'
+import { UI } from './components/UI'
 import useCodeStore from './store/code'
+import useLoadingStore from './store/loading'
 
 import './App.css'
 
 export default function App() {
   const codeStore = useCodeStore()
+  const loadingStore = useLoadingStore()
   
   useEffect(() => {
 
@@ -21,6 +24,7 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalRouter />
+      { loadingStore.isLoading && <UI.Loading full={true} /> }
     </ThemeProvider>
   )
 }

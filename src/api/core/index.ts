@@ -2,6 +2,7 @@ import axios from 'axios'
 import useAuthStore from '@/store/auth'
 import { isNotBlank, messageUtil } from '@/utils'
 import globalRouter from '@/routes'
+import { getState as getLoadingState } from '@/store/loading'
 
 /** axios 인스턴스 */
 const http = axios.create({
@@ -18,6 +19,13 @@ http.interceptors.request.use(
     if (isNotBlank(accessToken)) {
       config.headers['Authorization'] = `Bearer ${accessToken}`
     }
+
+    const isDataChangeRequest = (config.method === 'post' || config.method === 'put' || config.method === 'delete')
+    if (isDataChangeRequest) {
+      const loadingStore = getLoadingState()
+      loadingStore.setIsLoading(true)
+    }
+
     return config
   },
   error => {
@@ -28,9 +36,17 @@ http.interceptors.request.use(
 let isRefreshing = false
 
 http.interceptors.response.use(
-  response => response,
+  response => {
+    const loadingStore = getLoadingState()
+    loadingStore.setIsLoading(false)
+
+    return response
+  },
   async error => {
     const originalRequest = error.config
+
+    const loadingStore = getLoadingState()
+    loadingStore.setIsLoading(false)
 
     if (isNotBlank(error?.response?.data?.type) && error?.response?.data?.type === 'biz') {
       // 비즈니스 로직 예외 처리
