@@ -8,5 +8,29 @@
       "source": "/(.*)",
       "destination": "/"
     }
+  ],
+  "redirects": [
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "blogadmin.selosele.com"
+        }
+      ],
+      "destination": "https://blog.selosele.com/system",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "blogadmin.selosele.com"
+        }
+      ],
+      "destination": "https://blog.selosele.com/system/:path*",
+      "permanent": true
+    }
   ]
 }
