@@ -1,4 +1,6 @@
 // DTO
+export * from './dto/count-index-search-stat'
+export * from './dto/count-post-stat'
 export * from './dto/list-menu'
 export * from './dto/post-reply'
 export * from './dto/satisfatcion'

@@ -26,6 +26,11 @@
   font-weight: 700;
 }
 
+.stat-button-container {
+  display: flex;
+  gap: 0.5rem;
+}
+
 .stat-loading {
   display: flex;
   justify-content: center;
@@ -38,7 +43,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 1rem;
-  padding: 2rem;
+  padding: 0.5rem;
 }
 
 .stat-count {
@@ -57,9 +62,19 @@
   font-size: 0.85rem;
 }
 
+@media (min-width: 768px) {
+  .stat-list {
+    padding: 1rem;
+  }
+}
+
 @media (min-width: 1200px) {
   .stat-box {
     flex-basis: calc(50% - 2rem);
+  }
+
+  .stat-list {
+    padding: 2rem;
   }
 
   .stat-box3 {
