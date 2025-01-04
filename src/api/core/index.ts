@@ -1,7 +1,7 @@
 import axios from 'axios'
 import useAuthStore from '@/store/auth'
-import { isNotBlank, messageUtil } from '@/utils'
 import globalRouter from '@/routes'
+import { isNotBlank, messageUtil } from '@/utils'
 import { getState as getLoadingState } from '@/store/loading'
 
 /** axios 인스턴스 */
@@ -19,9 +19,14 @@ http.interceptors.request.use(
     if (isNotBlank(accessToken)) {
       config.headers['Authorization'] = `Bearer ${accessToken}`
     }
+    
+    /** 데이터 변경(post, put, delete) 작업을 수행하나, 로딩을 표출하지 않을 요청 url 목록 */
+    const noLoadingrequestUrls = ['/auth/refresh']
 
+    /** 데이터 변경 메서드(post, put, delete) */
     const isDataChangeRequest = (config.method === 'post' || config.method === 'put' || config.method === 'delete')
-    if (isDataChangeRequest) {
+
+    if (isDataChangeRequest && noLoadingrequestUrls.indexOf(config.url) === -1) {
       const loadingStore = getLoadingState()
       loadingStore.setIsLoading(true)
     }
