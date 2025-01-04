@@ -30,7 +30,7 @@ interface Props {
 /** 데이터그리드 버튼 컴포넌트 */
 export default function DataGridButton({ actionType = '', ...props }: Props) {
 
-  /** 버튼 색상 리턴 */
+  /** 버튼 색상 반환 */
   const getVariant = () => {
     switch (actionType) {
       case '':        return 'contained'
@@ -40,7 +40,7 @@ export default function DataGridButton({ actionType = '', ...props }: Props) {
     }
   }
 
-  /** 버튼 아이콘 컴포넌트 리턴 */
+  /** 버튼 아이콘 컴포넌트 반환 */
   const getIcon = () => {
     switch (actionType) {
       case '':        return ''
