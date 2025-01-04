@@ -1,5 +1,6 @@
 import { Children } from '@/models'
-import { Layout } from '..'
+import TopNav from '../TopNav/TopNav'
+import Footer from '../Footer/Footer'
 import useBreadcrumbStore from '@/store/breadcrumb'
 
 import './Container.css'
@@ -10,7 +11,7 @@ export default function Container(props: Children) {
 
   return (
     <>
-      <Layout.TopNav />
+      <TopNav />
 
       <div className={`layout-container`}>
         {breadcrumbStore.pageTitle !== '' && (
@@ -22,7 +23,7 @@ export default function Container(props: Children) {
         {props.children}
       </div>
 
-      <Layout.Footer />
+      <Footer />
     </>
   )
 }
