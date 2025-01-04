@@ -11,6 +11,8 @@ export default function IndexSearchStat() {
 
   /** 색인 포스트 개수 조회 */
   const countIndexSearchStat = (): void => {
+    setLoading(true) // 새로고침 버튼 클릭 시, 로딩상태 초기화
+
     http.get('/indexsearch/stat')
     .then(resp => {
       setLoading(false)
@@ -55,30 +57,30 @@ export default function IndexSearchStat() {
           />
         </div>
       </div>
-      {
-        loading
-          ? <div className={`stat-loading`}><UI.Loading /></div>
-          : <>
-            <ul className={`stat-list`}>
-              <li>
-                <span className={`stat-count`}>{data.total}</span>
-                <span className={`stat-name`}>TOTAL</span>
-              </li>
-              <li>
-                <span className={`stat-count`}>{data.normal}</span>
-                <span className={`stat-name`}>공개글</span>
-              </li>
-              <li>
-                <span className={`stat-count`}>{data.secret}</span>
-                <span className={`stat-name`}>비공개글</span>
-              </li>
-              <li>
-                <span className={`stat-count`}>{data.pin}</span>
-                <span className={`stat-name`}>고정글</span>
-              </li>
-            </ul>
-          </>
-      }
+      {loading ? (
+        <div className={`stat-loading`}>
+          <UI.Loading />
+        </div>
+      ) : (
+        <ul className={`stat-list`}>
+          <li>
+            <span className={`stat-count`}>{data.total}</span>
+            <span className={`stat-name`}>TOTAL</span>
+          </li>
+          <li>
+            <span className={`stat-count`}>{data.normal}</span>
+            <span className={`stat-name`}>공개글</span>
+          </li>
+          <li>
+            <span className={`stat-count`}>{data.secret}</span>
+            <span className={`stat-name`}>비공개글</span>
+          </li>
+          <li>
+            <span className={`stat-count`}>{data.pin}</span>
+            <span className={`stat-name`}>고정글</span>
+          </li>
+        </ul>
+      )}
     </>
   )
 }

@@ -24,7 +24,10 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalRouter />
-      { loadingStore.isLoading && <UI.Loading full={true} /> }
+      
+      {loadingStore.isLoading && (
+        <UI.Loading full={true} />
+      )}
     </ThemeProvider>
   )
 }

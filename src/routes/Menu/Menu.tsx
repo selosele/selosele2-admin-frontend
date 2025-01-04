@@ -125,28 +125,28 @@ export default function Menu() {
 
       <UI.Splitter>
         <UI.SplitterPane>
-          {
-            treeLoading
-            ? <UI.Skeleton count={3} />
-            : <UI.Tree
-                value={menuTree}
-                onNodeClick={onNodeClick}
-              /> 
-          }
+          {treeLoading ? (
+            <UI.Skeleton count={3} />
+          ) : (
+            <UI.Tree
+              value={menuTree}
+              onNodeClick={onNodeClick}
+            />
+          )}
         </UI.SplitterPane>
 
         {isSplitterActive && (
           <UI.SplitterPane>
-            {
-              detailLoading
-              ? <UI.Loading />
-              : <MenuDetail
-                  data={menuDetail}
-                  close={setIsSplitterActive}
-                  refreshTree={refreshTree}
-                  key={menuDetail?.id}
-                />
-            }
+            {detailLoading ? (
+              <UI.Loading />
+            ) : (
+              <MenuDetail
+                data={menuDetail}
+                close={setIsSplitterActive}
+                refreshTree={refreshTree}
+                key={menuDetail?.id}
+              />
+            )}
           </UI.SplitterPane>
         )}
       </UI.Splitter>

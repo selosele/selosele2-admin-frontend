@@ -197,30 +197,30 @@ export default function Category() {
         <TabPanel value='0'>
           <UI.Splitter>
             <UI.SplitterPane>
-              {
-                treeLoading
-                ? <UI.Skeleton count={3} />
-                : <UI.Tree
-                    keyType={'category'}
-                    value={categoryTree}
-                    onNodeClick={onNodeClick}
-                  />
-              }
+              {treeLoading ? (
+                <UI.Skeleton count={3} />
+              ) : (
+                <UI.Tree
+                  keyType={'category'}
+                  value={categoryTree}
+                  onNodeClick={onNodeClick}
+                />
+              )}
             </UI.SplitterPane>
 
             {isSplitterActive && (
               <UI.SplitterPane>
-                {
-                  detailLoading
-                  ? <UI.Loading />
-                  : <CategoryDetail
-                      data={categoryDetail}
-                      type={'D01004'}
-                      close={setIsSplitterActive}
-                      refreshTree={refreshTree}
-                      key={`${type}${categoryDetail?.id}`}
-                    />
-                }
+                {detailLoading ? (
+                  <UI.Loading />
+                ) : (
+                  <CategoryDetail
+                    data={categoryDetail}
+                    type={'D01004'}
+                    close={setIsSplitterActive}
+                    refreshTree={refreshTree}
+                    key={`${type}${categoryDetail?.id}`}
+                  />
+                )}
               </UI.SplitterPane>
             )}
           </UI.Splitter>
@@ -229,30 +229,30 @@ export default function Category() {
         <TabPanel value='1'>
           <UI.Splitter>
             <UI.SplitterPane>
-              {
-                treeLoading
-                ? <UI.Skeleton count={3} />
-                : <UI.Tree
-                    keyType={'tag'}
-                    value={tagTree}
-                    onNodeClick={onNodeClick}
-                  />
-              }
+              {treeLoading ? (
+                <UI.Skeleton count={3} />
+              ) : (
+                <UI.Tree
+                  keyType={'tag'}
+                  value={tagTree}
+                  onNodeClick={onNodeClick}
+                />
+              )}
             </UI.SplitterPane>
 
             {isSplitterActive && (
               <UI.SplitterPane>
-                {
-                  detailLoading
-                  ? <UI.Loading />
-                  : <CategoryDetail
-                      data={categoryDetail}
-                      type={'D01005'}
-                      close={setIsSplitterActive}
-                      refreshTree={refreshTree}
-                      key={`${type}${categoryDetail?.id}`}
-                    />
-                }
+                {detailLoading ? (
+                  <UI.Loading />
+                ) : (
+                  <CategoryDetail
+                    data={categoryDetail}
+                    type={'D01005'}
+                    close={setIsSplitterActive}
+                    refreshTree={refreshTree}
+                    key={`${type}${categoryDetail?.id}`}
+                  />
+                )}
               </UI.SplitterPane>
             )}
           </UI.Splitter>
