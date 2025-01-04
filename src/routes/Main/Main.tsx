@@ -10,11 +10,11 @@ import './Main.css'
 export default function Main() {
   const breadcrumbStore = useBreadcrumbStore()
 
-  const [total, setTotal] = useState<number>(0)
-  const [normal, setNormal] = useState<number>(0)
-  const [secret, setSecret] = useState<number>(0)
-  const [pin, setPin] = useState<number>(0)
-  const [tmp, setTmp] = useState<number>(0)
+  const [total, setTotal] = useState(0)
+  const [normal, setNormal] = useState(0)
+  const [secret, setSecret] = useState(0)
+  const [pin, setPin] = useState(0)
+  const [tmp, setTmp] = useState(0)
 
   const [countPostStatLoading, setCountPostStatLoading] = useState(true)
   const [countIndexSearchStatLoading, setCountIndexSearchStatLoading] = useState(true)
@@ -36,7 +36,7 @@ export default function Main() {
 
   /** 색인 포스트 개수 조회 */
   const countIndexSearchStat = (): void => {
-
+    console.log(countIndexSearchStatLoading);
   }
 
   /** 검색 색인 데이터 저장 */
