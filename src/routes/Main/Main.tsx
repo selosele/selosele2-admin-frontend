@@ -24,11 +24,7 @@ export default function Main() {
         </div>
 
         <div className={`stat-box stat-box3`}>
-          <div className={`stat-top`}>
-            <strong className={`stat-title`}>색인소요시간 차트</strong>
-          </div>
-          
-          {/* <div className={`stat-loading`}><UI.Loading /></div> */}
+          <Stat.IndexSearchLog />
         </div>
       </div>
     </main>
