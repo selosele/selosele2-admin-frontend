@@ -6,7 +6,7 @@
 
 .stat-box {
   position: relative;
-  flex-basis: calc(50% - 2rem);
+  flex-basis: 100%;
 }
 
 .stat-box3 {
@@ -16,6 +16,7 @@
 .stat-top {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   position: relative;
   padding: 0.5rem;
   border-bottom: 1px solid #e0e0e0;
@@ -56,14 +57,12 @@
   font-size: 0.9rem;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 19px;
-  }
-}
-
 @media (min-width: 1200px) {
-  html {
-    font-size: 20px;
+  .stat-box {
+    flex-basis: calc(50% - 2rem);
+  }
+
+  .stat-box3 {
+    flex-basis: 100%;
   }
 }
