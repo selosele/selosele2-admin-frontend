@@ -1,9 +1,9 @@
-.layout__footer {
+.layout-footer {
   padding: 0.9rem 0.5rem;
   background-color: #eaeaea;
   text-align: center;
 }
 
-.layout__footer p {
+.layout-footer p {
   font-size: 0.75rem;
 }

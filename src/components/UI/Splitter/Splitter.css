@@ -8,7 +8,7 @@
   max-width: none !important;
 }
 
-.pane ~ .pane .splitter__wrapper {
+.pane ~ .pane .splitter-wrapper {
   padding: 1rem;
   border: 10px solid #f2f2f2;
 }

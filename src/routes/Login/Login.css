@@ -1,4 +1,4 @@
-.login__container {
+.login-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,19 +8,19 @@
   box-sizing: border-box;
 }
 
-.login__form {
+.login-form {
   max-width: 23.33333rem;
   padding: 1.5rem;
   border: 1px solid #dcdcdc;
   background-color: #fff;
 }
 
-.login__title {
+.login-title {
   margin-top: 0;
   margin-bottom: 1.5rem;
   font-size: 1.8rem;
 }
 
-.login__input-item {
+.login-input-item {
   margin-bottom: 1rem;
 }

@@ -12,9 +12,9 @@ export default function Container(props: Children) {
     <>
       <Layout.TopNav />
 
-      <div className={`layout__container`}>
+      <div className={`layout-container`}>
         {breadcrumbStore.pageTitle !== '' && (
-          <h1 className={`layout__page-title`}>
+          <h1 className={`layout-page-title`}>
             {breadcrumbStore.pageTitle}
           </h1>
         )}

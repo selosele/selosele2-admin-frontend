@@ -41,14 +41,12 @@ export default function Login() {
   })
 
   return (
-    <div className={`login__container`}>
-      <div className={`login__form`}>
-        <h1 className={`login__title`}>
-          블로그 ADMIN 시스템
-        </h1>
+    <div className={`login-container`}>
+      <div className={`login-form`}>
+        <h1 className={`login-title`}>블로그 ADMIN 시스템</h1>
 
         <form onSubmit={loginForm.handleSubmit}>
-          <div className={`login__input-item`}>
+          <div className={`login-input-item`}>
             <TextField
               name='userId'
               placeholder='아이디'
@@ -60,7 +58,7 @@ export default function Login() {
             />
           </div> 
 
-          <div className={`login__input-item`}>
+          <div className={`login-input-item`}>
             <TextField
               type='password'
               name='userPw'
