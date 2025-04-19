@@ -15,6 +15,7 @@ export default function PostReply() {
   const [rowSelection, setRowSelection] = useState<GridRowSelectionModel>([])
   const columns: GridColDef<(typeof rows)[number]>[] = [
     { headerName: '댓글 URL', field: 'link', flex: 1 },
+    { headerName: '댓글 작성자', field: 'author', flex: 1 },
     { headerName: '댓글 내용', field: 'cont', flex: 1 },
     { headerName: '댓글 등록일시', field: 'regDate', flex: 1 },
     { headerName: '댓글 수정일시', field: 'modDate', flex: 1 }
