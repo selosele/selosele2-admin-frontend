@@ -12,12 +12,12 @@
 
 ## 개발 환경 (프론트엔드)
 
-- `Node.js` - v20.10.0
-- `React` - v18.2.0
-- `TypeScript` - v5.4.4
-- `WSL2` - Ubuntu 22.04 LTS
+- ```Node.js``` - v20.10.0
+- ```React``` - v18.2.0
+- ```TypeScript``` - v5.4.4
+- ```WSL2``` - Ubuntu 22.04 LTS
 
 ## 개발 환경 구동
 
-1. `npm install`
-2. `npm run dev`
+1. ```npm install```
+2. ```npm run dev```
